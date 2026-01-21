@@ -33,8 +33,8 @@ function DetectionPage() {
       <br />
       <br />
       <br />
-      <h1 style={{ textAlign: "center" }}>Upload Image for Acne Detection</h1>
-
+      <h1 style={{ textAlign: "center" }}>Upload Image for Acne Detection</h1> <br />
+      <h3 style={{ textAlign: "center" }}> Upload a clear face image.</h3> <br />
       {/* FILE UPLOAD AREA */}
       <div className={styles.uploadBox}>
       <input

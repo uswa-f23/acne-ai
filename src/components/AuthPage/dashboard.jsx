@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styles } from "./styles";
+// import Progress from "./components/AuthPage/progress";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -14,13 +15,13 @@ const Dashboard = () => {
       link: "/detection",
     },
     {
-      title: "Severity Analysis",
-      desc: "Analyze acne severity using our trained AI model.",
-      link: "/severity",
+      title: "Progress Tracking",
+      desc: "Analyze progress based on provided data.",
+      link: "/progress",
     },
     {
-      title: "Dataset Tools",
-      desc: "Remove duplicates and organize dataset folders.",
+      title: "Treatment",
+      desc: "Recommend Herbal and medicated treatments.",
       link: "/dataset-tools",
     },
   ];
@@ -97,7 +98,7 @@ const Dashboard = () => {
           );
         })}
       </div>
-      <button
+        <button
         onClick={() => navigate("/logout")}
         style={{
             padding: "10px 20px",
@@ -112,7 +113,6 @@ const Dashboard = () => {
         >
         Logout
         </button>
-
     </div>
   );
 };
