@@ -73,8 +73,13 @@ def predict(image_path):
 # 6. Run prediction
 # ----------------------------
 if __name__ == "__main__":
+<<<<<<< HEAD
     image_path = "C:/Users/HP/Desktop/FYP/testImage.jpeg"   # <- replace with your image file
     acne_type, severity, severity_score = predict(image_path)
+=======
+    image_path = "testImage.jpg"   # <- replace with your image file
+    acne_type, severity = predict(image_path)
+>>>>>>> 0a75b73a78bc05922712224bd4c0f4250c7568bc
     print("\n----- PREDICTION -----")
     print("Acne Type:", acne_type)
     print("Severity :", severity)
