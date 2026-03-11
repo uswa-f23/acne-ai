@@ -14,7 +14,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #ffffffd0; /* Light gray background by default */
+  background-color: #fff5f9; /* Light gray background by default */
   color: #111827; /* Default text color */
   font-family: inherit;
   display: flex;
@@ -35,6 +35,9 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+input{
+  background-color: #f3f4f6;
+}
 
 button {
   border-radius: 0.5rem;
@@ -43,7 +46,7 @@ button {
   font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
-  background-color: #224c87; /* Tailwind gray-800 */
+  background-color: #ff9ec5; /* Tailwind gray-800 */
   color: white;
   cursor: pointer;
   transition: all 0.25s;

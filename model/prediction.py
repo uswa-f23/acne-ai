@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from torchvision import transforms, models
 from PIL import Image
+from db_save import save_result
 
 # ----------------------------
 # 1. Image preprocessing
@@ -38,6 +39,16 @@ sev_model.load_state_dict(torch.load("acne_severity_classifier.pt", map_location
 sev_model.eval()
 
 # ----------------------------
+# Severity to numerical score mapping
+# ----------------------------
+severity_to_score = {
+    "mild": 1,
+    "moderate": 2,
+    "severe": 3
+}
+
+
+# ----------------------------
 # 5. Predict function
 # ----------------------------
 def predict(image_path):
@@ -55,15 +66,26 @@ def predict(image_path):
         sev_output = sev_model(img_t)
         sev_idx = sev_output.argmax(1).item()
         severity = severity_classes[sev_idx]
-
-    return acne_type, severity
+        severity_score = severity_to_score[severity]
+    return acne_type, severity,severity_score
 
 # ----------------------------
 # 6. Run prediction
 # ----------------------------
 if __name__ == "__main__":
     image_path = "C:/Users/HP/Desktop/FYP/testImage.jpeg"   # <- replace with your image file
-    acne_type, severity = predict(image_path)
+    acne_type, severity, severity_score = predict(image_path)
     print("\n----- PREDICTION -----")
     print("Acne Type:", acne_type)
     print("Severity :", severity)
+    print("Score:", severity_score)
+
+    user_id = 1  # temporary, later from login system
+    # ✅ SAVE TO DATABASE
+    save_result(
+        user_id=user_id,
+        image_path=image_path,
+        acne_type=acne_type,
+        severity=severity,
+        severity_score=severity_score
+    )

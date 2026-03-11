@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-primary-50 text-neutral-800 font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-400 to-secondary-400 text-white font-semibold px-6 py-3 rounded-full 
+    shadow-soft-lg hover:shadow-soft-xl transition-all duration-300 hover:scale-105 focus:outline-none 
+    focus:ring-2 focus:ring-primary-300 focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-primary-600 font-semibold px-6 py-3 rounded-full border-2 border-primary-300
+    hover:bg-primary-50 transition-all duration-300 hover:scale-105 focus:outline-none 
+    focus:ring-2 focus:ring-primary-300 focus:ring-offset-2;
+  }
+  
+  .btn-outline {
+    @apply bg-transparent border-2 border-primary-400 text-primary-600 font-semibold px-6 py-3 rounded-full
+    hover:bg-primary-400 hover:text-white transition-all duration-300 focus:outline-none 
+    focus:ring-2 focus:ring-primary-300 focus:ring-offset-2;
+  }
+  
+  .card {
+    @apply bg-white rounded-3xl shadow-soft p-6 border border-primary-100
+    hover:shadow-soft-lg transition-all duration-300;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 bg-primary-50 border-2 border-primary-200 rounded-2xl
+    focus:outline-none focus:border-primary-400 focus:bg-white transition-all duration-300
+    placeholder:text-neutral-400;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent;
+  }
+  
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff9ec5, #c084fc);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff7bb0, #a855f7);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
