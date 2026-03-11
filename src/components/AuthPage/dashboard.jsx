@@ -270,7 +270,10 @@ const DashboardPage = () => {
               <p className="text-neutral-700 text-sm mb-6">
                 Get instant answers to your skincare questions 24/7
               </p>
-              <button className="btn-primary w-full text-sm">
+              <button
+                className="btn-primary w-full text-sm"
+                onClick={() => window.dispatchEvent(new CustomEvent('openChatbot'))}
+              >
                 Start Chat
               </button>
             </div>

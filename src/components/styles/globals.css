@@ -75,3 +75,16 @@
 html {
   scroll-behavior: smooth;
 }
+.markdown-container p {
+  margin: 0 0 8px 0;
+}
+.markdown-container ul, .markdown-container ol {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+.markdown-container li {
+  margin-bottom: 4px;
+}
+.markdown-container strong {
+  font-weight: 700;
+}

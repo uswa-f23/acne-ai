@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Chatbot from './components/Chatbot/Chatbot';
+import { MessageCircle } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './components/AuthPage/HomePage';
@@ -33,7 +35,12 @@ function App() {
     }
     return children;
   };
-
+  const [isChatOpen, setIsChatOpen] = React.useState(false);
+  React.useEffect(() => {
+  const handler = () => setIsChatOpen(true);
+  window.addEventListener('openChatbot', handler);
+  return () => window.removeEventListener('openChatbot', handler);
+  }, []);
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
@@ -78,8 +85,31 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
-
+        {/* Floating Chat Button */}
         <Footer />
+        <button
+          onClick={() => setIsChatOpen(true)}
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            right: '24px',
+            width: '60px',
+            height: '60px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #f83c87 0%, #a855f7 100%)',
+            border: 'none',
+            cursor: 'pointer',
+            display: isChatOpen ? 'none' : 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 999,
+            boxShadow: '0 8px 32px rgba(248, 60, 135, 0.4)',
+          }}>
+          <MessageCircle color="white" size={28} />
+        </button>
+
+        <Chatbot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+
       </div>
     </Router>
   );

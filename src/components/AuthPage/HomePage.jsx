@@ -244,6 +244,11 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <section className="max-w-7xl mx-auto px-6 pb-12 text-center">
+        <p className="text-xl text-neutral-600 italic font-bold">
+          "This analysis is for informational purposes only and is not a substitute for professional medical advice. Please consult a licensed dermatologist for diagnosis and treatment."
+        </p>
+      </section>
     </div>
   );
 };
