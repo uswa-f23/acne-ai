@@ -1,8 +1,8 @@
-/* src/index.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Custom global styles */
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -14,21 +14,21 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #ffffffd0; /* Light gray background by default */
-  color: #111827; /* Default text color */
+  background-color: #ffffffd0; 
+  color: #111827; 
   font-family: inherit;
   display: flex;
   flex-direction: column;
-  /* align-items: ; */
+
 }
 
 a {
   font-weight: 500;
-  color: #6366f1; /* Tailwind indigo-500 */
+  color: #6366f1; 
   text-decoration: none;
 }
 a:hover {
-  color: #4f46e5; /* Tailwind indigo-600 */
+  color: #4f46e5; 
 }
 
 h1 {
@@ -43,14 +43,14 @@ button {
   font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
-  background-color: #224c87; /* Tailwind gray-800 */
+  background-color: #224c87; 
   color: white;
   cursor: pointer;
   transition: all 0.25s;
   
 }
 button:hover {
-  border-color: #6366f1; /* Tailwind indigo-500 */
+  border-color: #6366f1; 
 }
 
 @media (prefers-color-scheme: light) {
@@ -59,7 +59,7 @@ button:hover {
     color: #111827;
   }
   button {
-    background-color: #f3f4f6; /* Tailwind gray-100 */
+    background-color: #f3f4f6; 
     color: #111827;
   }
 }

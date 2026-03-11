@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { styles } from "./styles";
 
-import axios from "axios";
+//import axios from "axios";
 
 const ResetPassword = () => {
   const { token } = useParams();

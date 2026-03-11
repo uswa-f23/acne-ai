@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styles } from "./styles";
-// import Progress from "./components/AuthPage/progress";
-// codacy-test comment
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null);
 
-  // EXACTLY 3 CARDS
   const cardData = [
     {
       title: "Acne Detection",

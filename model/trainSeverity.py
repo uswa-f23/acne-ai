@@ -5,7 +5,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-# ==== 1. Paths ====
 data_dir = "labeled"  # Parent folder containing comedone/, nodulocystic/, papulopustular/
 # Each of these should have subfolders: mild/, moderate/, severe/
 
