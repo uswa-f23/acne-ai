@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -23,3 +24,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+=======
+venv/
+__pycache__/
+*.pyc
+.env
+*.db
+.DS_Store
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+>>>>>>> 6eebae9 (feat: initial project structure)
