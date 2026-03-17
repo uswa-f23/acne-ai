@@ -25,14 +25,14 @@ class Settings(BaseSettings):
     # ML
     ML_MODE: str = "real"
     MODEL_REGISTRY_PATH: str = "models"
-    DETECTION_MODEL_PATH: str = "models/detection_v1.onnx"
-    TYPE_MODEL_PATH: str = "models/type_v1.onnx"
-    SEVERITY_MODEL_PATH: str = "models/severity_v1.onnx"
+    DETECTION_MODEL_PATH: str = "models/detection.onnx"
+    TYPE_MODEL_PATH: str = "models/type.onnx"
+    SEVERITY_MODEL_PATH: str = "models/severity.onnx"
 
     # Chatbot
-    LLM_PROVIDER: str = "anthropic"
-    ANTHROPIC_API_KEY: Optional[str] = None
-    LLM_MODEL: str = "claude-sonnet-4-20250514"
+    LLM_PROVIDER: str = "groq"
+    GROQ_API_KEY: Optional[str] = None
+    LLM_MODEL: str = "llama-3.3-70b-versatile"
 
     # Monitoring
     SENTRY_DSN: Optional[str] = None

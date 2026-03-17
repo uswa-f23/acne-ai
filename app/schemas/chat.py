@@ -4,7 +4,7 @@ from typing import Optional
 
 class ChatMessageRequest(BaseModel):
     message: str
-    session_id: Optional[str] = None  # if None, starts new session
+    session_id: Optional[str] = None
 
 
 class ChatMessageResponse(BaseModel):
