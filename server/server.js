@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // Ensure this matches your React Vite port
+  origin: ['http://localhost:5173', 'http://localhost:5174'], // Ensure this matches your React Vite port
 }));
 app.use(express.json());
 

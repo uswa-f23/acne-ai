@@ -90,6 +90,7 @@ function App() {
         <button
           onClick={() => setIsChatOpen(true)}
           style={{
+            
             position: 'fixed',
             bottom: '24px',
             right: '24px',

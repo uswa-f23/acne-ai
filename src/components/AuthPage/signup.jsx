@@ -26,7 +26,7 @@ const SignUpPage = ({ onSignUp }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-b from-primary-100 to-primary-300 w-full lg:py-20 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-8 lg:gap-0">
         {/* Left Side - Branding */}
         <div className="hidden lg:flex bg-gradient-to-br from-secondary-500 via-primary-400 to-secondary-600 rounded-l-3xl p-12 flex-col justify-center items-center text-white relative overflow-hidden">

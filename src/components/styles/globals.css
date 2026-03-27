@@ -8,83 +8,92 @@
   body {
     @apply bg-primary-50 text-neutral-800 font-body;
   }
-  
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
   }
 }
 
 @layer components {
+  /* Primary CTA — solid brand pink */
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-400 to-secondary-400 text-white font-semibold px-6 py-3 rounded-full 
-    shadow-soft-lg hover:shadow-soft-xl transition-all duration-300 hover:scale-105 focus:outline-none 
-    focus:ring-2 focus:ring-primary-300 focus:ring-offset-2;
+    @apply bg-primary-500 text-white font-semibold px-6 py-3 rounded-full
+    shadow-soft hover:bg-primary-600 hover:shadow-soft-lg transition-all duration-300
+    hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:ring-offset-2;
   }
-  
+
+  /* Secondary — white with pink border */
   .btn-secondary {
-    @apply bg-white text-primary-600 font-semibold px-6 py-3 rounded-full border-2 border-primary-300
-    hover:bg-primary-50 transition-all duration-300 hover:scale-105 focus:outline-none 
-    focus:ring-2 focus:ring-primary-300 focus:ring-offset-2;
+    @apply bg-white text-primary-600 font-semibold px-6 py-3 rounded-full
+    border-2 border-primary-300 hover:bg-primary-50 hover:border-primary-400
+    transition-all duration-300 hover:scale-105 focus:outline-none
+    focus:ring-2 focus:ring-primary-200 focus:ring-offset-2;
   }
-  
+
+  /* Outline */
   .btn-outline {
-    @apply bg-transparent border-2 border-primary-400 text-primary-600 font-semibold px-6 py-3 rounded-full
-    hover:bg-primary-400 hover:text-white transition-all duration-300 focus:outline-none 
+    @apply bg-transparent border-2 border-primary-400 text-primary-600
+    font-semibold px-6 py-3 rounded-full hover:bg-primary-400 hover:text-white
+    transition-all duration-300 focus:outline-none
     focus:ring-2 focus:ring-primary-300 focus:ring-offset-2;
   }
-  
+
+  /* Dark button — footer / dark CTA sections only */
+  .btn-dark {
+    @apply bg-white text-mauve-800 font-semibold px-6 py-3 rounded-full
+    hover:bg-primary-50 transition-all duration-300
+    focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2;
+  }
+
+  /* Standard card — white with barely-there blush border */
   .card {
     @apply bg-white rounded-3xl shadow-soft p-6 border border-primary-100
     hover:shadow-soft-lg transition-all duration-300;
   }
-  
+
+  /* Blush card — for light section backgrounds */
+  .card-blush {
+    @apply bg-primary-50 rounded-3xl shadow-soft p-6 border border-primary-200
+    hover:shadow-soft-md transition-all duration-300;
+  }
+
+  /* Input */
   .input-field {
     @apply w-full px-4 py-3 bg-primary-50 border-2 border-primary-200 rounded-2xl
     focus:outline-none focus:border-primary-400 focus:bg-white transition-all duration-300
     placeholder:text-neutral-400;
   }
-  
+
+  /* Gradient text — brand pink to dusty rose */
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-500 to-mauve-500 bg-clip-text text-transparent;
   }
-  
+
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20;
   }
+
+  /* Section bg helpers */
+  .section-blush  { @apply bg-primary-50; }
+  .section-light  { @apply bg-mauve-100; }           /* feature/alternating sections */
+  .section-sale   { @apply bg-primary-200; }         /* promo/sale block */
+  .section-dark   { @apply text-white; } /* footer only */
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #fff5f9;
-}
-
+/* Scrollbar */
+::-webkit-scrollbar       { width: 8px; }
+::-webkit-scrollbar-track { background: #fff5f9; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ff9ec5, #c084fc);
+  background: linear-gradient(180deg, #f5629d, #c95570);
   border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ff7bb0, #a855f7);
+  background: linear-gradient(180deg, #de4080, #a83a55);
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
-.markdown-container p {
-  margin: 0 0 8px 0;
-}
-.markdown-container ul, .markdown-container ol {
-  padding-left: 20px;
-  margin: 8px 0;
-}
-.markdown-container li {
-  margin-bottom: 4px;
-}
-.markdown-container strong {
-  font-weight: 700;
-}
+html { scroll-behavior: smooth; }
+
+.markdown-container p              { margin: 0 0 8px 0; }
+.markdown-container ul,
+.markdown-container ol             { padding-left: 20px; margin: 8px 0; }
+.markdown-container li             { margin-bottom: 4px; }
+.markdown-container strong         { font-weight: 700; }

@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,36 +6,36 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #fff5f9; /* Light gray background by default */
-  color: #111827; /* Default text color */
+  background-color: #fff5f9;   /* primary-50 — lightest blush */
+  color: #3d3936;               /* neutral-800 — warm dark text */
   font-family: inherit;
   display: flex;
   flex-direction: column;
-
 }
 
 a {
   font-weight: 500;
-  color: #6366f1; 
+  color: #c95570;               /* mauve-500 */
   text-decoration: none;
 }
 a:hover {
-  color: #4f46e5; 
+  color: #a83a55;               /* mauve-600 */
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-input{
-  background-color: #f3f4f6;
+
+input {
+  background-color: #ffe8f2;   /* primary-100 — soft blush input */
 }
 
 button {
@@ -46,23 +45,22 @@ button {
   font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
-  background-color: #ff9ec5; /* Tailwind gray-800 */
+  background-color: #f5629d;   /* primary-500 */
   color: white;
   cursor: pointer;
   transition: all 0.25s;
-  
 }
 button:hover {
-  border-color: #6366f1; 
+  border-color: #c95570;       /* mauve-500 */
 }
 
 @media (prefers-color-scheme: light) {
   body {
-    background-color: #ffffff;
-    color: #111827;
+    background-color: #fff5f9;
+    color: #3d3936;
   }
   button {
-    background-color: #f3f4f6; 
-    color: #111827;
+    background-color: #ffd0e6; /* primary-200 */
+    color: #3d3936;
   }
 }

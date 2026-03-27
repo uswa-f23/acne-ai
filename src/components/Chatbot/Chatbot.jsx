@@ -114,7 +114,7 @@ const Chatbot = ({ isOpen, onClose }) => {
         {/* Header */}
         <div style={{
           padding: '1.5rem',
-          background: `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.lavender[500]} 100%)`,
+          background: `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.mauve[500]} 100%)`,
           color: '#ffffff',
           display: 'flex',
           alignItems: 'center',
@@ -170,7 +170,7 @@ const Chatbot = ({ isOpen, onClose }) => {
           flex: 1,
           overflowY: 'auto',
           padding: '1.5rem',
-          backgroundColor: theme.colors.neutral[50],
+          backgroundColor: theme.colors.mauve[50],
           display: 'flex',
           flexDirection: 'column',
           gap: '1rem',
@@ -190,7 +190,7 @@ const Chatbot = ({ isOpen, onClose }) => {
                 <div style={{
                   width: '32px',
                   height: '32px',
-                  backgroundColor: theme.colors.lavender[100],
+                  backgroundColor: theme.colors.mauve[100],
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
@@ -198,7 +198,7 @@ const Chatbot = ({ isOpen, onClose }) => {
                   marginRight: '0.5rem',
                   flexShrink: 0,
                 }}>
-                  <Sparkles className="w-4 h-4" style={{ color: theme.colors.lavender[600] }} />
+                  <Sparkles className="w-4 h-4" style={{ color: theme.colors.mauve[600] }} />
                 </div>
               )}
 
@@ -210,14 +210,14 @@ const Chatbot = ({ isOpen, onClose }) => {
                   ? `${theme.borderRadius.lg} ${theme.borderRadius.lg} 0 ${theme.borderRadius.lg}`
                   : `${theme.borderRadius.lg} ${theme.borderRadius.lg} ${theme.borderRadius.lg} 0`,
                 backgroundColor: message.sender === 'user' 
-                  ? theme.colors.primary[500] 
+                  ? theme.colors.mauve[500] 
                   : '#ffffff',
                 color: message.sender === 'user' ? '#ffffff' : theme.colors.neutral[800],
                 boxShadow: theme.shadows.sm,
                 fontSize: theme.typography.sizes.sm,
                 lineHeight: '1.6',
                 background: message.sender === 'user' 
-                  ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.lavender[500]} 100%)`
+                  ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.mauve[500]} 100%)`
                   : '#ffffff',
               }}>
                 {message.sender === 'bot' ? (
@@ -244,12 +244,12 @@ const Chatbot = ({ isOpen, onClose }) => {
 
           {isTyping && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <div style={{ width: '32px', height: '32px', backgroundColor: theme.colors.lavender[100], borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Sparkles className="w-4 h-4" style={{ color: theme.colors.lavender[600] }} />
+              <div style={{ width: '32px', height: '32px', backgroundColor: theme.colors.mauve[100], borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Sparkles className="w-4 h-4" style={{ color: theme.colors.mauve[600] }} />
               </div>
               <div style={{ padding: '0.875rem 1rem', borderRadius: theme.borderRadius.lg, backgroundColor: '#ffffff', boxShadow: theme.shadows.sm, display: 'flex', gap: '0.25rem' }}>
                 {[0, 1, 2].map((i) => (
-                  <motion.div key={i} animate={{ y: [0, -8, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }} style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: theme.colors.lavender[400] }} />
+                  <motion.div key={i} animate={{ y: [0, -8, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }} style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: theme.colors.mauve[400] }} />
                 ))}
               </div>
             </div>
@@ -259,7 +259,7 @@ const Chatbot = ({ isOpen, onClose }) => {
         </div>
 
         {/* Input Area */}
-        <div style={{ padding: '1rem 1.5rem', backgroundColor: '#ffffff', borderTop: `1px solid ${theme.colors.neutral[200]}` }}>
+        <div style={{ padding: '1rem 1.5rem', backgroundColor: '#ffffff', borderTop: `1px solid ${theme.colors.mauve[200]}` }}>
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end' }}>
             <textarea
               ref={inputRef}
@@ -284,7 +284,7 @@ const Chatbot = ({ isOpen, onClose }) => {
               disabled={!inputValue.trim() || isTyping}
               style={{
                 padding: '0.75rem',
-                background: inputValue.trim() && !isTyping ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.lavender[500]} 100%)` : theme.colors.neutral[300],
+                background: inputValue.trim() && !isTyping ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.mauve[500]} 100%)` : theme.colors.neutral[300],
                 border: 'none',
                 borderRadius: theme.borderRadius.md,
                 color: '#ffffff',
