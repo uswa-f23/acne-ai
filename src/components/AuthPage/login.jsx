@@ -1,27 +1,45 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Sparkles, Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import authService from '../../services/authService';
 
 const LoginPage = ({ onLogin }) => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    onLogin();
-    navigate('/dashboard');
+    setLoading(true);
+    setError('');
+
+    try {
+      const result = await authService.login(formData.email, formData.password);
+
+      if (result.success) {
+        onLogin();
+        navigate('/dashboard');
+      } else {
+        setError('Invalid email or password. Please try again.');
+      }
+    } catch (err) {
+      const message = err.response?.data?.detail?.message
+        || err.response?.data?.message
+        || 'Login failed. Please check your credentials.';
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) setError('');
   };
 
   return (
@@ -31,13 +49,10 @@ const LoginPage = ({ onLogin }) => {
         <div className="hidden lg:flex bg-gradient-to-br from-primary-500 via-secondary-400 to-primary-600 rounded-l-3xl p-12 flex-col justify-center items-center text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
-          
           <div className="relative z-10 space-y-6 text-center">
             <Sparkles className="w-20 h-20 mx-auto animate-pulse" />
             <h2 className="text-4xl font-display font-bold">Welcome Back!</h2>
-            <p className="text-xl text-primary-50">
-              Continue your journey to clear, healthy skin
-            </p>
+            <p className="text-xl text-primary-50">Continue your journey to clear, healthy skin</p>
             <div className="pt-8 space-y-4">
               <div className="flex items-center space-x-3 text-primary-50">
                 <div className="w-8 h-1 bg-white/50 rounded"></div>
@@ -58,20 +73,21 @@ const LoginPage = ({ onLogin }) => {
         {/* Right Side - Login Form */}
         <div className="bg-white rounded-3xl lg:rounded-l-none lg:rounded-r-3xl shadow-soft-xl p-8 lg:p-12">
           <div className="max-w-md mx-auto">
-            {/* Header */}
             <div className="text-center mb-8 space-y-3">
               <div className="flex justify-center lg:hidden mb-4">
                 <Sparkles className="w-12 h-12 text-primary-500" />
               </div>
-              <h2 className="text-3xl font-display font-bold text-neutral-800">
-                Sign In
-              </h2>
-              <p className="text-neutral-600">
-                Access your personalized dashboard
-              </p>
+              <h2 className="text-3xl font-display font-bold text-neutral-800">Sign In</h2>
+              <p className="text-neutral-600">Access your personalized dashboard</p>
             </div>
 
-            {/* Form */}
+            {/* Error Message */}
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm text-center">
+                {error}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Email Field */}
               <div className="space-y-2">
@@ -128,7 +144,7 @@ const LoginPage = ({ onLogin }) => {
                 </div>
               </div>
 
-              {/* Forgot Password Link */}
+              {/* Forgot Password */}
               <div className="flex items-center justify-end">
                 <Link
                   to="/forgot-password"
@@ -139,11 +155,21 @@ const LoginPage = ({ onLogin }) => {
               </div>
 
               {/* Submit Button */}
-              <button type="submit" className="w-full btn-primary">
-                Sign In
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full btn-primary disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Signing in...
+                  </>
+                ) : (
+                  'Sign In'
+                )}
               </button>
 
-              {/* Divider */}
               <div className="relative my-6">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-neutral-200"></div>
@@ -153,7 +179,6 @@ const LoginPage = ({ onLogin }) => {
                 </div>
               </div>
 
-              {/* Sign Up Link */}
               <div className="text-center">
                 <p className="text-neutral-600">
                   Don't have an account?{' '}
