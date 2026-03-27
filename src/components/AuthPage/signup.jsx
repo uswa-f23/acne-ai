@@ -1,28 +1,63 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Sparkles, Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
+import authService from '../../services/authService';
 
 const SignUpPage = ({ onSignUp }) => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your signup logic here
-    onSignUp();
-    navigate('/dashboard');
+    setLoading(true);
+    setError('');
+
+    // Basic validation
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters.');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const result = await authService.register(
+        formData.name,
+        formData.email,
+        formData.password
+      );
+
+      if (result.success) {
+        onSignUp();
+        navigate('/dashboard');
+      } else {
+        setError('Registration failed. Please try again.');
+      }
+    } catch (err) {
+      const message = err.response?.data?.detail?.message
+        || err.response?.data?.message
+        || 'Registration failed. Please try again.';
+
+      // Handle duplicate email
+      if (err.response?.status === 409) {
+        setError('An account with this email already exists. Please sign in.');
+      } else {
+        setError(message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) setError('');
   };
 
   return (
@@ -32,28 +67,19 @@ const SignUpPage = ({ onSignUp }) => {
         <div className="hidden lg:flex bg-gradient-to-br from-secondary-500 via-primary-400 to-secondary-600 rounded-l-3xl p-12 flex-col justify-center items-center text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
-          
           <div className="relative z-10 space-y-6 text-center">
             <Sparkles className="w-20 h-20 mx-auto animate-pulse" />
             <h2 className="text-4xl font-display font-bold">Start Your Journey</h2>
-            <p className="text-xl text-primary-50">
-              Join thousands achieving clearer skin with AI
-            </p>
+            <p className="text-xl text-primary-50">Join thousands achieving clearer skin with AI</p>
             <div className="pt-8 space-y-4">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <p className="text-primary-50 text-sm">
-                  ✨ AI-powered acne detection in seconds
-                </p>
+                <p className="text-primary-50 text-sm">✨ AI-powered acne detection in seconds</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <p className="text-primary-50 text-sm">
-                  📊 Track your progress over time
-                </p>
+                <p className="text-primary-50 text-sm">📊 Track your progress over time</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <p className="text-primary-50 text-sm">
-                  💝 Personalized treatment recommendations
-                </p>
+                <p className="text-primary-50 text-sm">💝 Personalized treatment recommendations</p>
               </div>
             </div>
           </div>
@@ -62,20 +88,21 @@ const SignUpPage = ({ onSignUp }) => {
         {/* Right Side - SignUp Form */}
         <div className="bg-white rounded-3xl lg:rounded-l-none lg:rounded-r-3xl shadow-soft-xl p-8 lg:p-12">
           <div className="max-w-md mx-auto">
-            {/* Header */}
             <div className="text-center mb-8 space-y-3">
               <div className="flex justify-center lg:hidden mb-4">
                 <Sparkles className="w-12 h-12 text-primary-500" />
               </div>
-              <h2 className="text-3xl font-display font-bold text-neutral-800">
-                Create Account
-              </h2>
-              <p className="text-neutral-600">
-                Begin your transformation today
-              </p>
+              <h2 className="text-3xl font-display font-bold text-neutral-800">Create Account</h2>
+              <p className="text-neutral-600">Begin your transformation today</p>
             </div>
 
-            {/* Form */}
+            {/* Error Message */}
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm text-center">
+                {error}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Field */}
               <div className="space-y-2">
@@ -157,7 +184,7 @@ const SignUpPage = ({ onSignUp }) => {
                 </p>
               </div>
 
-              {/* Terms and Conditions */}
+              {/* Terms */}
               <div className="flex items-start">
                 <input
                   id="terms"
@@ -179,11 +206,21 @@ const SignUpPage = ({ onSignUp }) => {
               </div>
 
               {/* Submit Button */}
-              <button type="submit" className="w-full btn-primary">
-                Create Account
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full btn-primary disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Creating account...
+                  </>
+                ) : (
+                  'Create Account'
+                )}
               </button>
 
-              {/* Divider */}
               <div className="relative my-6">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-neutral-200"></div>
@@ -193,7 +230,6 @@ const SignUpPage = ({ onSignUp }) => {
                 </div>
               </div>
 
-              {/* Login Link */}
               <div className="text-center">
                 <p className="text-neutral-600">
                   Already have an account?{' '}

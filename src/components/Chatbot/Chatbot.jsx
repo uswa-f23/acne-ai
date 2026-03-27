@@ -12,7 +12,6 @@ const Chatbot = ({ isOpen, onClose }) => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Initialize with welcome message
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       const welcomeMsg = getWelcomeMessage();
@@ -20,12 +19,10 @@ const Chatbot = ({ isOpen, onClose }) => {
     }
   }, [isOpen, messages.length]);
 
-  // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Focus input when opened
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
@@ -47,26 +44,25 @@ const Chatbot = ({ isOpen, onClose }) => {
     setIsTyping(true);
 
     try {
+      // ← Direct call, no fake setTimeout delay
       const botResponse = await sendMessageToBot(messageText);
-      
-      setTimeout(() => {
-        setMessages(prev => [...prev, {
-          id: Date.now(),
-          text: botResponse,
-          sender: 'bot',
-          timestamp: new Date(),
-        }]);
-        setIsTyping(false);
-      }, 1000 + Math.random() * 1000);
-    } catch (error) {
-      setIsTyping(false);
+
       setMessages(prev => [...prev, {
-        id: Date.now(),
+        id: Date.now() + 1,
+        text: botResponse,
+        sender: 'bot',
+        timestamp: new Date(),
+      }]);
+    } catch (error) {
+      setMessages(prev => [...prev, {
+        id: Date.now() + 1,
         text: "I'm sorry, I'm having trouble connecting right now. Please try again later.",
         sender: 'bot',
         timestamp: new Date(),
         isError: true,
       }]);
+    } finally {
+      setIsTyping(false);
     }
   };
 
@@ -110,11 +106,11 @@ const Chatbot = ({ isOpen, onClose }) => {
           zIndex: 1000,
           fontFamily: theme.typography.fonts.body,
         }}>
-        
+
         {/* Header */}
         <div style={{
           padding: '1.5rem',
-          background: `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.mauve[500]} 100%)`,
+          background: `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.lavender[500]} 100%)`,
           color: '#ffffff',
           display: 'flex',
           alignItems: 'center',
@@ -122,13 +118,10 @@ const Chatbot = ({ isOpen, onClose }) => {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{
-              width: '40px',
-              height: '40px',
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              width: '40px', height: '40px',
+              backgroundColor: 'rgba(255,255,255,0.2)',
               borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <Bot className="w-6 h-6" />
             </div>
@@ -141,40 +134,51 @@ const Chatbot = ({ isOpen, onClose }) => {
               }}>
                 AcneAI Assistant
               </h3>
-              <p style={{
-                margin: 0,
-                fontSize: theme.typography.sizes.xs,
-                opacity: 0.9,
-              }}>
+              <p style={{ margin: 0, fontSize: theme.typography.sizes.xs, opacity: 0.9 }}>
                 Online • Ready to help
               </p>
             </div>
           </div>
-          
           <button
             onClick={onClose}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#ffffff',
-              cursor: 'pointer',
-              padding: '0.5rem',
-              borderRadius: '50%',
-            }}>
+            style={{ background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer', padding: '0.5rem', borderRadius: '50%' }}>
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Messages Container */}
+        {/* Messages */}
         <div style={{
-          flex: 1,
-          overflowY: 'auto',
-          padding: '1.5rem',
-          backgroundColor: theme.colors.mauve[50],
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
+          flex: 1, overflowY: 'auto', padding: '1.5rem',
+          backgroundColor: theme.colors.neutral[50],
+          display: 'flex', flexDirection: 'column', gap: '1rem',
         }}>
+
+          {/* Suggested Questions — show only before first user message */}
+          {messages.length === 1 && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <p style={{ fontSize: theme.typography.sizes.xs, color: theme.colors.neutral[500], textAlign: 'center' }}>
+                Suggested questions:
+              </p>
+              {suggestedQuestions.map((q, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleSuggestedQuestion(q)}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    background: theme.colors.primary[50],
+                    border: `1px solid ${theme.colors.primary[200]}`,
+                    borderRadius: theme.borderRadius.md,
+                    color: theme.colors.primary[700],
+                    fontSize: theme.typography.sizes.xs,
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                  }}>
+                  {q}
+                </button>
+              ))}
+            </div>
+          )}
+
           {messages.map((message) => (
             <motion.div
               key={message.id}
@@ -185,40 +189,34 @@ const Chatbot = ({ isOpen, onClose }) => {
                 display: 'flex',
                 justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start',
               }}>
-              
+
               {message.sender === 'bot' && (
                 <div style={{
-                  width: '32px',
-                  height: '32px',
-                  backgroundColor: theme.colors.mauve[100],
+                  width: '32px', height: '32px',
+                  backgroundColor: theme.colors.lavender[100],
                   borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginRight: '0.5rem',
-                  flexShrink: 0,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginRight: '0.5rem', flexShrink: 0,
                 }}>
-                  <Sparkles className="w-4 h-4" style={{ color: theme.colors.mauve[600] }} />
+                  <Sparkles className="w-4 h-4" style={{ color: theme.colors.lavender[600] }} />
                 </div>
               )}
 
-              {/* INTEGRATED MARKDOWN BUBBLE START */}
               <div style={{
                 maxWidth: '75%',
                 padding: '0.875rem 1rem',
-                borderRadius: message.sender === 'user' 
+                borderRadius: message.sender === 'user'
                   ? `${theme.borderRadius.lg} ${theme.borderRadius.lg} 0 ${theme.borderRadius.lg}`
                   : `${theme.borderRadius.lg} ${theme.borderRadius.lg} ${theme.borderRadius.lg} 0`,
-                backgroundColor: message.sender === 'user' 
-                  ? theme.colors.mauve[500] 
-                  : '#ffffff',
+                backgroundColor: message.sender === 'user' ? theme.colors.primary[500] : '#ffffff',
                 color: message.sender === 'user' ? '#ffffff' : theme.colors.neutral[800],
                 boxShadow: theme.shadows.sm,
                 fontSize: theme.typography.sizes.sm,
                 lineHeight: '1.6',
-                background: message.sender === 'user' 
-                  ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.mauve[500]} 100%)`
-                  : '#ffffff',
+                background: message.sender === 'user'
+                  ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.lavender[500]} 100%)`
+                  : message.isError ? '#FEF2F2' : '#ffffff',
+                border: message.isError ? '1px solid #FECACA' : 'none',
               }}>
                 {message.sender === 'bot' ? (
                   <div className="markdown-container">
@@ -227,29 +225,47 @@ const Chatbot = ({ isOpen, onClose }) => {
                 ) : (
                   message.text
                 )}
-
                 <div style={{
                   fontSize: theme.typography.sizes.xs,
                   opacity: 0.7,
                   marginTop: '0.5rem',
-                  textAlign: message.sender === 'user' ? 'right' : 'left'
+                  textAlign: message.sender === 'user' ? 'right' : 'left',
                 }}>
                   {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
               </div>
-              {/* INTEGRATED MARKDOWN BUBBLE END */}
-
             </motion.div>
           ))}
 
+          {/* Typing indicator */}
           {isTyping && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <div style={{ width: '32px', height: '32px', backgroundColor: theme.colors.mauve[100], borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Sparkles className="w-4 h-4" style={{ color: theme.colors.mauve[600] }} />
+              <div style={{
+                width: '32px', height: '32px',
+                backgroundColor: theme.colors.lavender[100],
+                borderRadius: '50%',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <Sparkles className="w-4 h-4" style={{ color: theme.colors.lavender[600] }} />
               </div>
-              <div style={{ padding: '0.875rem 1rem', borderRadius: theme.borderRadius.lg, backgroundColor: '#ffffff', boxShadow: theme.shadows.sm, display: 'flex', gap: '0.25rem' }}>
+              <div style={{
+                padding: '0.875rem 1rem',
+                borderRadius: theme.borderRadius.lg,
+                backgroundColor: '#ffffff',
+                boxShadow: theme.shadows.sm,
+                display: 'flex', gap: '0.25rem',
+              }}>
                 {[0, 1, 2].map((i) => (
-                  <motion.div key={i} animate={{ y: [0, -8, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }} style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: theme.colors.mauve[400] }} />
+                  <motion.div
+                    key={i}
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }}
+                    style={{
+                      width: '8px', height: '8px',
+                      borderRadius: '50%',
+                      backgroundColor: theme.colors.lavender[400],
+                    }}
+                  />
                 ))}
               </div>
             </div>
@@ -258,8 +274,12 @@ const Chatbot = ({ isOpen, onClose }) => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input Area */}
-        <div style={{ padding: '1rem 1.5rem', backgroundColor: '#ffffff', borderTop: `1px solid ${theme.colors.mauve[200]}` }}>
+        {/* Input */}
+        <div style={{
+          padding: '1rem 1.5rem',
+          backgroundColor: '#ffffff',
+          borderTop: `1px solid ${theme.colors.neutral[200]}`,
+        }}>
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end' }}>
             <textarea
               ref={inputRef}
@@ -284,7 +304,9 @@ const Chatbot = ({ isOpen, onClose }) => {
               disabled={!inputValue.trim() || isTyping}
               style={{
                 padding: '0.75rem',
-                background: inputValue.trim() && !isTyping ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.mauve[500]} 100%)` : theme.colors.neutral[300],
+                background: inputValue.trim() && !isTyping
+                  ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.lavender[500]} 100%)`
+                  : theme.colors.neutral[300],
                 border: 'none',
                 borderRadius: theme.borderRadius.md,
                 color: '#ffffff',
