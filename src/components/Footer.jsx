@@ -67,9 +67,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-mauve-700 text-sm opacity-70">© 2026 AcneAI. All rights reserved.</p>
             <p className="flex items-center space-x-2 text-mauve-700 text-sm opacity-70">
-              <span>Made with</span>
-              <Heart className="w-4 h-4 fill-current text-mauve-700animate-pulse" />
-              <span>by the AcneAI Team</span>
+              
             </p>
           </div>
         </div>

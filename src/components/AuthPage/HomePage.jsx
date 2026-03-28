@@ -138,7 +138,7 @@ const HomePage = () => {
               ))}
               
               {/* Carousel Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-secondary-400/20 to-primary-600/20"></div>
+              <div className="absolute inset-0 "></div>
               
               {/* Carousel Indicators */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
@@ -162,7 +162,7 @@ const HomePage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="bg-gradient-to-b from-primary-50 to-primary-300 py-20">
+      <section className="bg-gradient-to-b from-primary-100 to-primary-300 py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-neutral-800">
@@ -196,8 +196,8 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24 py-12 lg:py-20">
-        <div className="bg-gradient-to-br bg-primary-300 via-secondary-400 to-primary-600 rounded-3xl shadow-soft-xl overflow-hidden">
+      <section className="bg-gradient-to-b from-primary-100 to-primary-300  w-full py-12 lg:py-20">
+        <div className="bg-gradient-to-b from-primary-100 to-primary-300 rounded-3xl shadow-soft-xl overflow-hidden max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center p-8 lg:p-16">
             <div className="space-y-6 text-white">
               <h2 className="text-3xl md:text-4xl font-display font-bold">
@@ -227,9 +227,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </section>
-      <section className="max-w-7xl mx-auto px-6 pb-12 text-center">
-        <p className="text-xl text-neutral-600 italic font-bold">
+        <p className="text-xl text-neutral-600 italic font-bold max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           "This analysis is for informational purposes only and is not a substitute for professional medical advice. Please consult a licensed dermatologist for diagnosis and treatment."
         </p>
       </section>

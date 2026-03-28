@@ -2,41 +2,219 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ══════════════════════════════════════════
+   🌸 PINK THEME (default)
+══════════════════════════════════════════ */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light;
+  /* Primary */
+  --color-primary-50:  #fff5f9;
+  --color-primary-100: #ffe8f2;
+  --color-primary-200: #ffd0e6;
+  --color-primary-300: #ffadd0;
+  --color-primary-400: #ff80b5;
+  --color-primary-500: #f5629d;
+  --color-primary-600: #de4080;
+  --color-primary-700: #b82d65;
+  --color-primary-800: #8f1f4c;
+  --color-primary-900: #661535;
+  --color-primary-950: #3d0a1f;
+  /* Mauve */
+  --color-mauve-50:  #fdf0f2;
+  --color-mauve-100: #fae0e4;
+  --color-mauve-200: #f5c2cb;
+  --color-mauve-300: #eda0ae;
+  --color-mauve-400: #e07a8d;
+  --color-mauve-500: #c95570;
+  --color-mauve-600: #a83a55;
+  --color-mauve-700: #852b42;
+  --color-mauve-800: #621e30;
+  --color-mauve-900: #42131f;
+  --color-mauve-950: #280b13;
+  /* Cream */
+  --color-cream-50:  #ffffff;
+  --color-cream-100: #fdf8f5;
+  --color-cream-200: #faf2ec;
+  --color-cream-300: #f5e8df;
+  --color-cream-400: #ecddd2;
+  --color-cream-500: #ddc9b8;
+  --color-cream-600: #c4a48e;
+  --color-cream-700: #9e7d62;
+  --color-cream-800: #72533a;
+  --color-cream-900: #4a3322;
+  --color-cream-950: #2c1d12;
+  /* Neutral */
+  --color-neutral-50:  #fafaf9;
+  --color-neutral-100: #f5f5f4;
+  --color-neutral-200: #e8e5e3;
+  --color-neutral-300: #d4cfc9;
+  --color-neutral-400: #b0a89f;
+  --color-neutral-500: #8a7f76;
+  --color-neutral-600: #6b605a;
+  --color-neutral-700: #534d48;
+  --color-neutral-800: #3d3936;
+  --color-neutral-900: #2a2623;
+  --color-neutral-950: #1a1614;
+  /* Semantic */
+  --color-bg:       #fff5f9;
+  --color-text:     #3d3936;
+  --color-input-bg: #ffe8f2;
+  --color-btn:      #f5629d;
+  --color-btn-hover:#c95570;
+  --color-link:     #c95570;
+  --color-link-hover:#a83a55;
 }
+
+/* ══════════════════════════════════════════
+   🌹 DUSKY ROSE THEME
+══════════════════════════════════════════ */
+[data-theme="dusky"] {
+  /* Primary → dusty rose tones */
+  --color-primary-50:  #f7f0f2;
+  --color-primary-100: #f0e2e6;
+  --color-primary-200: #dfc4cc;
+  --color-primary-300: #c9a0ab;
+  --color-primary-400: #b38690;
+  --color-primary-500: #9e7c81;
+  --color-primary-600: #856369;
+  --color-primary-700: #6b4d54;
+  --color-primary-800: #52383e;
+  --color-primary-900: #3a2529;
+  --color-primary-950: #221418;
+  /* Mauve → dusty plum */
+  --color-mauve-50:  #f2eef4;
+  --color-mauve-100: #e4daea;
+  --color-mauve-200: #c9b5d4;
+  --color-mauve-300: #a888b8;
+  --color-mauve-400: #8a6598;
+  --color-mauve-500: #70465b;
+  --color-mauve-600: #5e3a4d;
+  --color-mauve-700: #4c2e3e;
+  --color-mauve-800: #3a2230;
+  --color-mauve-900: #281620;
+  --color-mauve-950: #160c12;
+  /* Cream → warm parchment */
+  --color-cream-50:  #fdfaf8;
+  --color-cream-100: #f8f2ee;
+  --color-cream-200: #f0e5dc;
+  --color-cream-300: #e4d0c4;
+  --color-cream-400: #d4b8a8;
+  --color-cream-500: #c0a090;
+  --color-cream-600: #a08070;
+  --color-cream-700: #7d6055;
+  --color-cream-800: #5a423c;
+  --color-cream-900: #3a2a26;
+  --color-cream-950: #221816;
+  /* Neutral → warm greige */
+  --color-neutral-50:  #f8f5f3;
+  --color-neutral-100: #f0eae6;
+  --color-neutral-200: #e0d4ce;
+  --color-neutral-300: #c8b8b0;
+  --color-neutral-400: #a89088;
+  --color-neutral-500: #8a7068;
+  --color-neutral-600: #6e5850;
+  --color-neutral-700: #544240;
+  --color-neutral-800: #3c2e2c;
+  --color-neutral-900: #281e1c;
+  --color-neutral-950: #181010;
+  /* Semantic */
+  --color-bg:       #f5f0f2;
+  --color-text:     #442f36;
+  --color-input-bg: #f0e2e6;
+  --color-btn:      #9e7c81;
+  --color-btn-hover:#70465b;
+  --color-link:     #7d616c;
+  --color-link-hover:#70465b;
+}
+
+/* ══════════════════════════════════════════
+   🌙 DARK THEME
+══════════════════════════════════════════ */
+[data-theme="dark"] {
+  /* Primary → muted pink on dark */
+  --color-primary-50:  #2a1a22;
+  --color-primary-100: #3d2030;
+  --color-primary-200: #5a2d42;
+  --color-primary-300: #7a3d58;
+  --color-primary-400: #a05878;
+  --color-primary-500: #c084a0;
+  --color-primary-600: #d4a0b8;
+  --color-primary-700: #e8c0d0;
+  --color-primary-800: #f0d8e4;
+  --color-primary-900: #f8eef4;
+  --color-primary-950: #fdf8fb;
+  /* Mauve → deep plum */
+  --color-mauve-50:  #1e1220;
+  --color-mauve-100: #2d1a30;
+  --color-mauve-200: #442840;
+  --color-mauve-300: #5e3858;
+  --color-mauve-400: #7a4d72;
+  --color-mauve-500: #a06880;
+  --color-mauve-600: #c08898;
+  --color-mauve-700: #d8aab8;
+  --color-mauve-800: #eeccd8;
+  --color-mauve-900: #f8eaef;
+  --color-mauve-950: #fdf5f8;
+  /* Cream → dark surfaces */
+  --color-cream-50:  #0f0a10;
+  --color-cream-100: #1a1018;
+  --color-cream-200: #261820;
+  --color-cream-300: #342030;
+  --color-cream-400: #442840;
+  --color-cream-500: #5a3850;
+  --color-cream-600: #7a5870;
+  --color-cream-700: #a07890;
+  --color-cream-800: #c8a0b8;
+  --color-cream-900: #e8d0e0;
+  --color-cream-950: #f8f0f4;
+  /* Neutral → cool dark */
+  --color-neutral-50:  #181218;
+  --color-neutral-100: #221820;
+  --color-neutral-200: #30222c;
+  --color-neutral-300: #40303c;
+  --color-neutral-400: #604858;
+  --color-neutral-500: #886878;
+  --color-neutral-600: #a88898;
+  --color-neutral-700: #c8a8b8;
+  --color-neutral-800: #e0c8d4;
+  --color-neutral-900: #f0e4ec;
+  --color-neutral-950: #faf4f8;
+  /* Semantic */
+  --color-bg:       #1a1118;
+  --color-text:     #f0e8ec;
+  --color-input-bg: #2d2030;
+  --color-btn:      #c084a0;
+  --color-btn-hover:#a06880;
+  --color-link:     #d4a0b8;
+  --color-link-hover:#e8c0d0;
+}
+
+/* ══════════════════════════════════════════
+   BASE STYLES (use CSS vars)
+══════════════════════════════════════════ */
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #fff5f9;   /* primary-50 — lightest blush */
-  color: #3d3936;               /* neutral-800 — warm dark text */
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: inherit;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
   font-weight: 500;
-  color: #c95570;               /* mauve-500 */
+  color: var(--color-link);
   text-decoration: none;
 }
-a:hover {
-  color: #a83a55;               /* mauve-600 */
-}
+a:hover { color: var(--color-link-hover); }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+h1 { font-size: 3.2em; line-height: 1.1; }
 
-input {
-  background-color: #ffe8f2;   /* primary-100 — soft blush input */
-}
+input { background-color: var(--color-input-bg); }
 
 button {
   border-radius: 0.5rem;
@@ -45,22 +223,63 @@ button {
   font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
-  background-color: #f5629d;   /* primary-500 */
+  background-color: var(--color-btn);
   color: white;
   cursor: pointer;
   transition: all 0.25s;
 }
-button:hover {
-  border-color: #c95570;       /* mauve-500 */
-}
+button:hover { border-color: var(--color-btn-hover); }
 
-@media (prefers-color-scheme: light) {
-  body {
-    background-color: #fff5f9;
-    color: #3d3936;
-  }
-  button {
-    background-color: #ffd0e6; /* primary-200 */
-    color: #3d3936;
-  }
-}
+/* Force theme colors onto Tailwind utility classes */
+[data-theme="dusky"] .bg-primary-50  { background-color: #f7f0f2 !important; }
+[data-theme="dusky"] .bg-primary-100 { background-color: #f0e2e6 !important; }
+[data-theme="dusky"] .bg-primary-200 { background-color: #dfc4cc !important; }
+[data-theme="dusky"] .bg-primary-300 { background-color: #c9a0ab !important; }
+[data-theme="dusky"] .bg-primary-400 { background-color: #b38690 !important; }
+[data-theme="dusky"] .bg-primary-500 { background-color: #9e7c81 !important; }
+[data-theme="dusky"] .text-primary-500 { color: #9e7c81 !important; }
+[data-theme="dusky"] .text-primary-600 { color: #856369 !important; }
+[data-theme="dusky"] .text-primary-700 { color: #6b4d54 !important; }
+[data-theme="dusky"] .border-primary-100 { border-color: #f0e2e6 !important; }
+[data-theme="dusky"] .border-primary-200 { border-color: #dfc4cc !important; }
+[data-theme="dusky"] .border-primary-300 { border-color: #c9a0ab !important; }
+[data-theme="dusky"] .bg-mauve-100  { background-color: #e4daea !important; }
+[data-theme="dusky"] .bg-mauve-400  { background-color: #8a6598 !important; }
+[data-theme="dusky"] .bg-mauve-500  { background-color: #70465b !important; }
+[data-theme="dusky"] .bg-mauve-800  { background-color: #3a2230 !important; }
+[data-theme="dusky"] .text-mauve-500 { color: #70465b !important; }
+[data-theme="dusky"] .text-mauve-600 { color: #5e3a4d !important; }
+[data-theme="dusky"] .text-mauve-700 { color: #4c2e3e !important; }
+[data-theme="dusky"] .from-primary-400 { --tw-gradient-from: #b38690 !important; }
+[data-theme="dusky"] .to-mauve-400    { --tw-gradient-to: #8a6598 !important; }
+[data-theme="dusky"] .from-primary-500 { --tw-gradient-from: #9e7c81 !important; }
+[data-theme="dusky"] .to-mauve-500    { --tw-gradient-to: #70465b !important; }
+
+[data-theme="dark"] .bg-primary-50  { background-color: #2a1a22 !important; }
+[data-theme="dark"] .bg-primary-100 { background-color: #3d2030 !important; }
+[data-theme="dark"] .bg-primary-200 { background-color: #5a2d42 !important; }
+[data-theme="dark"] .bg-primary-300 { background-color: #7a3d58 !important; }
+[data-theme="dark"] .bg-primary-400 { background-color: #a05878 !important; }
+[data-theme="dark"] .bg-primary-500 { background-color: #c084a0 !important; }
+[data-theme="dark"] .text-primary-500 { color: #c084a0 !important; }
+[data-theme="dark"] .text-primary-600 { color: #d4a0b8 !important; }
+[data-theme="dark"] .text-primary-700 { color: #e8c0d0 !important; }
+[data-theme="dark"] .border-primary-100 { border-color: #3d2030 !important; }
+[data-theme="dark"] .border-primary-200 { border-color: #5a2d42 !important; }
+[data-theme="dark"] .border-primary-300 { border-color: #7a3d58 !important; }
+[data-theme="dark"] .bg-mauve-100  { background-color: #2d1a30 !important; }
+[data-theme="dark"] .bg-mauve-400  { background-color: #7a4d72 !important; }
+[data-theme="dark"] .bg-mauve-500  { background-color: #a06880 !important; }
+[data-theme="dark"] .bg-mauve-800  { background-color: #1e1220 !important; }
+[data-theme="dark"] .text-mauve-500 { color: #a06880 !important; }
+[data-theme="dark"] .text-mauve-600 { color: #c08898 !important; }
+[data-theme="dark"] .text-mauve-700 { color: #d8aab8 !important; }
+[data-theme="dark"] .text-neutral-600 { color: #c8a8b8 !important; }
+[data-theme="dark"] .text-neutral-800 { color: #e0c8d4 !important; }
+[data-theme="dark"] .bg-neutral-50  { background-color: #181218 !important; }
+[data-theme="dark"] .from-primary-400 { --tw-gradient-from: #a05878 !important; }
+[data-theme="dark"] .to-mauve-400    { --tw-gradient-to: #7a4d72 !important; }
+[data-theme="dark"] .from-primary-500 { --tw-gradient-from: #c084a0 !important; }
+[data-theme="dark"] .to-mauve-500    { --tw-gradient-to: #a06880 !important; }
+[data-theme="dark"] .bg-white { background-color: #2d2030 !important; }
+[data-theme="dark"] .text-white { color: #f0e8ec !important; }
