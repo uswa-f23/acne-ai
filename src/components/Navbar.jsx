@@ -55,6 +55,17 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-400 to-mauve-400 group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
+            {/* Ask AI button — same underline style */}
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('openChatbot'))}
+              className="text-neutral-600 hover:text-primary-500 font-medium
+              transition-colors duration-300 relative group
+              bg-transparent border-none shadow-none p-0"
+            >
+              Ask AI
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r
+              from-primary-400 to-mauve-400 group-hover:w-full transition-all duration-300" />
+            </button>
 
             {/* Theme dropdown — no icon, no box, underline style */}
             <div className="relative" data-theme-dropdown>
@@ -122,10 +133,12 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 </Link>
                 <Link
                   to="/signup"
-                  className="text-primary-500 hover:text-primary-600 font-medium transition-colors duration-300 relative group"
+                  className="text-neutral-600 hover:text-primary-500 font-medium
+                  transition-colors duration-300 relative group"
                 >
                   Sign Up
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-400 to-mauve-400 group-hover:w-full transition-all duration-300" />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r
+                  from-primary-400 to-mauve-400 group-hover:w-full transition-all duration-300" />
                 </Link>
               </div>
             )}
@@ -156,7 +169,16 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 {link.name}
               </Link>
             ))}
-
+            <button
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('openChatbot'));
+                setIsMenuOpen(false);
+              }}
+              className="block text-neutral-600 hover:text-primary-500 font-medium py-2
+              transition-colors duration-300 bg-transparent border-none shadow-none p-0 w-full text-left"
+            >
+              Ask AI
+            </button>
             {/* Mobile theme picker — pill buttons */}
             <div className="py-2">
               <p className="text-xs text-neutral-400 font-semibold uppercase tracking-wide mb-2">Theme</p>
@@ -177,7 +199,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 ))}
               </div>
             </div>
-
+            
             {isLoggedIn ? (
               <>
                 <Link
@@ -208,7 +230,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 <Link
                   to="/signup"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block text-primary-500 hover:text-primary-600 font-medium py-2 transition-colors duration-300"
+                  className="block text-neutral-600 hover:text-primary-500 font-medium py-2 transition-colors duration-300"
                 >
                   Sign Up
                 </Link>

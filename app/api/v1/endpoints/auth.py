@@ -11,6 +11,7 @@ from app.core.security import (
 from app.utils.response import success_response, error_response
 from app.utils import errors
 import uuid
+from app.core.dependencies import get_current_user
 
 router = APIRouter()
 
@@ -106,4 +107,11 @@ async def refresh_token(payload: RefreshRequest, db: AsyncSession = Depends(get_
     return success_response(data={
         "access_token": new_access_token,
         "expires_in": 3600
+    })
+@router.get("/me")
+async def get_me(current_user: User = Depends(get_current_user)):
+    return success_response(data={
+        "user_id": current_user.id,
+        "email": current_user.email,
+        "full_name": current_user.full_name,
     })

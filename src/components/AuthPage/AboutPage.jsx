@@ -108,7 +108,7 @@ const AboutPage = () => {
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <h3 className="text-xl font-display font-semibold text-primary-600">
+                  <h3 className="text-xl font-display font-semibold text-secondary-600">
                     ResNet50 Model
                   </h3>
                   <p className="text-neutral-600">
@@ -153,7 +153,7 @@ const AboutPage = () => {
       </section>
 
       {/* Values Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24 lg:py-20 bg-gradient-to-b from-primary-50 to-primary-200 py-20">
+      <section className="bg-gradient-to-b from-primary-50 to-primary-200 py-20">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-800">
             Our <span className="gradient-text">Values</span>
@@ -163,7 +163,7 @@ const AboutPage = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           {values.map((value, index) => (
             <div
               key={index}

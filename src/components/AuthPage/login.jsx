@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Sparkles, Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import authService from '../../services/authService';
@@ -12,26 +12,46 @@ const LoginPage = ({ onLogin }) => {
     email: '',
     password: ''
   });
+  const timerRef = useRef(null);
 
+  const showError = (message) => {
+    
+    if (timerRef.current) clearTimeout(timerRef.current);
+    
+    setError(message);
+    
+    timerRef.current = setTimeout(() => {
+      setError('');
+      timerRef.current = null;
+    }, 10000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []); 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    e.stopPropagation();
+    
+    if (timerRef.current) clearTimeout(timerRef.current);
     setError('');
+    setLoading(true);
 
     try {
       const result = await authService.login(formData.email, formData.password);
-
-      if (result.success) {
+      console.log('Auth result:', result);
+      
+      if (result.success === true) {
         onLogin();
         navigate('/dashboard');
       } else {
-        setError('Invalid email or password. Please try again.');
+        showError(result.message || 'Invalid email or password.');
       }
     } catch (err) {
-      const message = err.response?.data?.detail?.message
-        || err.response?.data?.message
-        || 'Login failed. Please check your credentials.';
-      setError(message);
+      console.log('Caught error:', err);
+      showError('Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
     }
@@ -39,7 +59,6 @@ const LoginPage = ({ onLogin }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (error) setError('');
   };
 
   return (

@@ -97,3 +97,15 @@ html { scroll-behavior: smooth; }
 .markdown-container ol             { padding-left: 20px; margin: 8px 0; }
 .markdown-container li             { margin-bottom: 4px; }
 .markdown-container strong         { font-weight: 700; }
+
+.story-textarea {
+  caret-color: var(--color-primary-500);
+  color: var(--color-text);
+  background-color: var(--color-input-bg);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.story-textarea::placeholder {
+  color: var(--color-text-muted, #b0a89f);
+  opacity: 0.7;
+}

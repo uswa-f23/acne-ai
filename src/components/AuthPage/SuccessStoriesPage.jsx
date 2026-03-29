@@ -73,7 +73,7 @@ const SuccessStoriesPage = () => {
       {/* ── Hero Banner ───────────────────────────────────────────── */}
       <section className="w-full bg-gradient-to-br from-primary-100 to-mauve-100 py-16">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 bg-white/70 text-primary-600 px-4 py-2 rounded-full border border-primary-200">
+          <div className="inline-flex items-center space-x-2 bg-primary-100 text-primary-600 px-4 py-2 rounded-full border border-primary-200">
             <Sparkles className="w-4 h-4" />
             <span className="text-sm font-semibold">Real People, Real Results</span>
           </div>
@@ -104,7 +104,7 @@ const SuccessStoriesPage = () => {
               onChange={(e) => setForm(p => ({ ...p, username: e.target.value }))}
               placeholder="Your name or nickname"
               maxLength={30}
-              className="input-field"
+              className="rounded-xl p-2 input-field"
             />
             <br />
             <textarea
@@ -112,9 +112,8 @@ const SuccessStoriesPage = () => {
               onChange={(e) => setForm(p => ({ ...p, story: e.target.value }))}
               placeholder="Share your acne journey... What worked for you? How did AcneAI help?"
               rows={5}
-              cols={70}
               maxLength={500}
-              className="input-field resize-none"
+              className="rounded-xl p-2 input-field resize-none w-full story-textarea"
             />
             <div className="flex justify-between items-center">
               <span className="text-xs text-neutral-400">{form.story.length}/500</span>
@@ -171,7 +170,7 @@ const SuccessStoriesPage = () => {
                 </div>
                 <div className="flex-1">
                   <p className="font-semibold text-neutral-800 text-sm">{story.username}</p>
-                  <p className="text-xs text-neutral-400">{formatDate(story.created_at)}</p>
+                  <p className="text-xs text-neutral-600">{formatDate(story.created_at)}</p>
                 </div>
                 {/* Like button */}
                 <button

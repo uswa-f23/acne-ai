@@ -25,6 +25,8 @@ const DashboardPage = () => {
     try {
       // Get user info
       const savedUser = authService.getUser();
+      //Debigging
+      console.log('USER OBJECT:', savedUser);
       if (savedUser) setUser(savedUser);
 
       // Load progress summary
@@ -65,7 +67,7 @@ const DashboardPage = () => {
   const getTrendLabel = (trend) => {
     if (trend === 'improving') return '📈 Improving';
     if (trend === 'worsening') return '📉 Worsening';
-    return '➡️ Stable';
+    return 'Stable';
   };
 
   // Helper: achievement badge
@@ -106,7 +108,7 @@ const DashboardPage = () => {
               <h1 className="text-3xl md:text-4xl font-display font-bold text-neutral-800">
                 Welcome back, <span className="gradient-text">
                   {user?.full_name?.split(' ')[0] || 'User'}
-                </span>! 👋
+                </span>! 
               </h1>
               <p className="text-neutral-600 mt-2">
                 Track your progress and continue your journey to clear skin

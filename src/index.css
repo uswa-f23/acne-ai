@@ -283,3 +283,33 @@ button:hover { border-color: var(--color-btn-hover); }
 [data-theme="dark"] .to-mauve-500    { --tw-gradient-to: #a06880 !important; }
 [data-theme="dark"] .bg-white { background-color: #2d2030 !important; }
 [data-theme="dark"] .text-white { color: #f0e8ec !important; }
+
+[data-theme="dusky"] .story-textarea {
+  caret-color: #9e7c81;
+  color: #442f36;
+  background-color: #f0e2e6;
+  border-color: #c9a0ab;
+}
+[data-theme="dusky"] .story-textarea::placeholder {
+  color: #a89088;
+}
+[data-theme="dusky"] .story-textarea:focus {
+  border-color: #9e7c81;
+  background-color: #fdfaf8;
+}
+
+/* Dark theme */
+[data-theme="dark"] .story-textarea {
+  caret-color: #c084a0;
+  color: #f0e8ec;
+  background-color: #3d2030;
+  border-color: #5a2d42;
+}
+[data-theme="dark"] .story-textarea::placeholder {
+  color: #886878;
+  opacity: 0.8;
+}
+[data-theme="dark"] .story-textarea:focus {
+  border-color: #c084a0;
+  background-color: #442840;
+}
