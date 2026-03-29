@@ -146,7 +146,7 @@ const DashboardPage = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-neutral-600 mb-1">Trend</p>
-                <p className="text-xl font-display font-bold text-secondary-600">
+                <p className="text-3xl font-display font-bold text-primary-600">
                   {getTrendLabel(trend)}
                 </p>
               </div>
@@ -160,7 +160,7 @@ const DashboardPage = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-neutral-600 mb-1">Days Tracked</p>
-                <p className="text-3xl font-display font-bold text-accent-600">
+                <p className="text-3xl font-display font-bold text-primary-600">
                   {progressData?.period_days || 30}
                 </p>
               </div>
@@ -376,7 +376,7 @@ const DashboardPage = () => {
             </div>
 
             {/* AI Assistant */}
-            <div className="card bg-gradient-to-br from-secondary-100 to-primary-100 border-secondary-200">
+            <div className="card bg-gradient-to-br from-secondary-100 to-primary-100 border-secondary-200 rounded-xl p-6">
               <div className="flex items-center space-x-3 mb-4">
                 <MessageCircle className="w-6 h-6 text-secondary-600" />
                 <h3 className="text-lg font-display font-bold text-neutral-800">
@@ -438,7 +438,7 @@ const DashboardPage = () => {
         <span className="relative flex items-center space-x-2">
           <Camera className="w-5 h-5" />
           <span>Upload Image</span>
-          <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+          <ChevronRight className="w-5 h-8 group-hover:translate-x-1 transition-transform duration-300" />
         </span>
       </Link>
     </div>

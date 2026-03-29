@@ -29,3 +29,11 @@ class RegisterResponse(BaseModel):
     email: str
     access_token: str
     refresh_token: str
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str

@@ -305,7 +305,7 @@ const ProgressPage = () => {
           </div>
 
           {/* Key Insights */}
-          <div className="bg-gradient-to-br from-mauve-800 via-mauve-700 to-primary-800 rounded-3xl p-8 shadow-dusty-lg text-white space-y-5">
+          <div className="bg-gradient-to-br from-primary-200 via-primary-400 to-primary-600 rounded-3xl p-8 shadow-dusty-lg text-white space-y-5">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-white" />

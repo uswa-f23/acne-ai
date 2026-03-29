@@ -181,7 +181,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
             </button>
             {/* Mobile theme picker — pill buttons */}
             <div className="py-2">
-              <p className="text-xs text-neutral-400 font-semibold uppercase tracking-wide mb-2">Theme</p>
+              <p className="text-xs text-neutral-600 font-semibold uppercase tracking-wide mb-2">Theme</p>
               <div className="flex space-x-2">
                 {themes.map((t) => (
                   <button

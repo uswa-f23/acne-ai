@@ -13,6 +13,19 @@ from app.utils import errors
 import uuid
 from app.core.dependencies import get_current_user
 
+from app.core.security import create_access_token
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from app.schemas.auth import ForgotPasswordRequest, ResetPasswordRequest
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+EMAIL_ADDRESS  = os.getenv("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+
 router = APIRouter()
 
 
@@ -115,3 +128,75 @@ async def get_me(current_user: User = Depends(get_current_user)):
         "email": current_user.email,
         "full_name": current_user.full_name,
     })
+
+#  Additional endpoints for password reset, email verification, etc. can be added here
+
+@router.post("/forgot-password")
+async def forgot_password(payload: ForgotPasswordRequest, db: AsyncSession = Depends(get_db)):
+    email = payload.email 
+    
+    # Check if email exists
+    result = await db.execute(select(User).where(User.email == email))
+    user = result.scalar_one_or_none()
+    
+    # Always return success (don't reveal if email exists — security best practice)
+    if not user:
+        return success_response(data={"message": "If this email exists, a reset link has been sent."})
+    
+    # Create reset token (expires in 1 hour)
+    reset_token = create_access_token({"sub": user.id, "type": "reset"})
+    FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173") #Should have to change it with original domain in production
+    reset_link = f"{FRONTEND_URL}/reset-password?token={reset_token}"
+    # Send email
+    try:
+        msg = MIMEMultipart()
+        msg['From']    = EMAIL_ADDRESS   # ← your Gmail
+        msg['To']      = email
+        msg['Subject'] = "AcneAI — Password Reset"
+        
+        body = f"""
+        Hi {user.full_name},
+        
+        You requested a password reset for your AcneAI account.
+        Click the link below to reset your password:
+        
+        {reset_link}
+        
+        This link expires in 1 hour.
+        If you didn't request this, ignore this email.
+        
+        — AcneAI Team
+        """
+        msg.attach(MIMEText(body, 'plain'))
+        
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD) 
+            server.send_message(msg)
+    except Exception as e:
+        print(f"Email send error: {e}")
+    
+    return success_response(data={"message": "If this email exists, a reset link has been sent."})
+
+
+@router.post("/reset-password")
+async def reset_password(payload: ResetPasswordRequest, db: AsyncSession = Depends(get_db)):
+    token    = payload.token
+    new_pass = payload.new_password
+    
+    token_data = decode_token(token)
+    if not token_data or token_data.get("type") != "reset":
+        return error_response(code=errors.INVALID_TOKEN, message="Invalid or expired reset link.", status_code=401)
+    
+    user_id = token_data.get("sub")
+    result  = await db.execute(select(User).where(User.id == user_id))
+    user    = result.scalar_one_or_none()
+    
+    if not user:
+        return error_response(code=errors.INVALID_TOKEN, message="User not found.", status_code=404)
+    
+    user.hashed_password = hash_password(new_pass)
+    await db.commit()
+    
+    return success_response(data={"message": "Password reset successful."})
+

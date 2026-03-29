@@ -13,10 +13,9 @@ import DetectionPage from './components/AuthPage/detection';
 import ProgressPage from './components/AuthPage/progress';
 import ForgotPasswordPage from './components/AuthPage/ForgetPassword';
 import SuccessStoriesPage from './components/AuthPage/SuccessStoriesPage';
+import ResetPasswordPage from './components/AuthPage/ResetPasswordPage';
 
-// ✅ ProtectedRoute OUTSIDE App — prevents remount bug
 const ProtectedRoute = ({ children, isLoggedIn }) => {
-  // Double-check localStorage directly as backup
   const hasToken = !!localStorage.getItem('access_token');
 
   if (!isLoggedIn && !hasToken) {
@@ -31,8 +30,7 @@ function App() {
   });
   const [authLoading, setAuthLoading] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
-
-  // Give auth state time to initialize before rendering routes
+  
   useEffect(() => {
     setAuthLoading(false);
   }, []);
@@ -50,10 +48,9 @@ function App() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user');
-    // ✅ No window.location.href — React Router handles navigation
+   
   }, []);
 
-  // Don't render routes until auth state is confirmed
   if (authLoading) return null;
 
   return (
@@ -70,7 +67,8 @@ function App() {
             <Route path="/signup" element={<SignUpPage onSignUp={handleSignUp} />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/stories" element={<SuccessStoriesPage />} />
-
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             {/* Protected Routes */}
             <Route
               path="/dashboard"
