@@ -65,7 +65,7 @@ const DashboardPage = () => {
   const getTrendLabel = (trend) => {
     if (trend === 'improving') return '📈 Improving';
     if (trend === 'worsening') return '📉 Worsening';
-    return '➡️ Stable';
+    return 'Stable';
   };
 
   // Helper: achievement badge
@@ -404,6 +404,14 @@ const DashboardPage = () => {
               <h3 className="text-lg font-display font-bold text-neutral-800 mb-4">
                 Recommended Actions
               </h3>
+              
+              <Link
+                to="/product-scanner"
+                className="flex items-center justify-between p-3 bg-primary-50 rounded-xl hover:bg-primary-100 transition-colors duration-300"
+              >
+               <span className="text-sm font-medium text-neutral-800">Check product safety</span>
+               <ChevronRight className="w-5 h-5 text-primary-500" />
+              </Link>
               <div className="space-y-3">
                 <Link
                   to="/detection"

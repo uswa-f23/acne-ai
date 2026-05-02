@@ -12,6 +12,7 @@ import DashboardPage from './components/AuthPage/dashboard';
 import DetectionPage from './components/AuthPage/detection';
 import ProgressPage from './components/AuthPage/progress';
 import ForgotPasswordPage from './components/AuthPage/ForgetPassword';
+import ProductScanner from './components/AuthPage/ProductScanner';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -54,6 +55,7 @@ function App() {
             <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
             <Route path="/signup" element={<SignUpPage onSignUp={handleSignUp} />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/product-scanner" element={<ProductScanner />} />
 
             {/* Protected Routes */}
             <Route

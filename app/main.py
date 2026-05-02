@@ -9,16 +9,15 @@ app = FastAPI(
     description="Acne detection and treatment recommendation API"
 )
 
-# CORS - allows your React frontend to talk to this API
+# CORS - allow frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # tighten this in production
+    allow_origins=["*"],  # or ["http://localhost:5173"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Register all routes
 app.include_router(api_router, prefix="/v1")
 
 

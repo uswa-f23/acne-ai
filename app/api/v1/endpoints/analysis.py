@@ -100,35 +100,56 @@ async def upload_analysis(
 @router.get("/status/{job_id}")
 async def get_analysis_status(
     job_id: str,
+    db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
     from app.tasks.celery_app import celery_app
     from celery.result import AsyncResult
+    from app.models.analysis import Analysis
 
     task_result = AsyncResult(job_id, app=celery_app)
     state = task_result.state
+
+    # Check DB directly for completed status
+    analysis_stmt = await db.execute(
+        select(Analysis).where(Analysis.task_id == job_id)
+    )
+    analysis = analysis_stmt.scalar_one_or_none()
+
+    if analysis and analysis.status == "completed":
+        # Get result_id from DB
+        from app.models.result import Result
+        result_stmt = await db.execute(
+            select(Result).where(Result.analysis_id == analysis.id)
+        )
+        result = result_stmt.scalar_one_or_none()
+        if result:
+            return success_response(data={
+                "status": "completed",
+                "progress": 100,
+                "result_id": result.id,
+                "redirect_url": f"/v1/results/{result.id}"
+            })
+
+    if analysis and analysis.status == "failed":
+        return success_response(data={"status": "failed", "progress": 0})
 
     if state == "PENDING" or state == "STARTED":
         progress = 0
         if task_result.info and isinstance(task_result.info, dict):
             progress = task_result.info.get("progress", 0)
-        return success_response(data={
-            "status": "processing",
-            "progress": progress
-        })
+        return success_response(data={"status": "processing", "progress": progress})
 
     elif state == "SUCCESS":
         result = task_result.result
         return success_response(data={
             "status": "completed",
+            "progress": 100,
             "result_id": result.get("result_id"),
             "redirect_url": f"/v1/results/{result.get('result_id')}"
         })
 
     elif state == "FAILURE":
-        return success_response(data={
-            "status": "failed",
-            "progress": 0
-        })
+        return success_response(data={"status": "failed", "progress": 0})
 
-    return success_response(data={"status": state.lower(), "progress": 0})
+    return success_response(data={"status": "processing", "progress": 0})

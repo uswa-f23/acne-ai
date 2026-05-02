@@ -39,8 +39,11 @@ const DetectionPage = () => {
     try {
       // Step 1: Upload image
       const uploadResponse = await analysisService.uploadImage(selectedImage);
-      if (!uploadResponse.success) {
-        throw new Error('Failed to upload image.');
+      console.log('Upload response:', uploadResponse);
+
+      // ← FIX: job_id is inside uploadResponse.data
+      if (!uploadResponse.success || !uploadResponse.data?.job_id) {
+        throw new Error('Job ID not found in upload response.');
       }
 
       const { job_id } = uploadResponse.data;
@@ -55,17 +58,12 @@ const DetectionPage = () => {
 
       // Step 3: Fetch result
       const resultResponse = await resultsService.getResult(resultId);
-      if (!resultResponse.success) {
-        throw new Error('Failed to fetch result.');
-      }
-
+      if (!resultResponse.success) throw new Error('Failed to fetch result.');
       const result = resultResponse.data;
 
       // Step 4: Fetch treatments
       const treatmentResponse = await treatmentService.getTreatment(resultId);
-      if (treatmentResponse.success) {
-        setTreatmentData(treatmentResponse.data);
-      }
+      if (treatmentResponse.success) setTreatmentData(treatmentResponse.data);
 
       setProgress(100);
       setAnalysisResult(result);
