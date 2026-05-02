@@ -11,7 +11,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <Sparkles className="w-8 h-8 text-primary-500 " />
+              <img src="/logo1.png" alt="AcneAI Logo" className="w-8 h-8 text-primary-500 " />
               <span className="text-2xl font-display font-bold text-mauve-700">AcneAI</span>
             </div>
             <p className="text-mauve-700 text-sm leading-relaxed opacity-80">

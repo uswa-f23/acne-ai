@@ -38,18 +38,18 @@ const ForgotPasswordPage = () => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
           <div className="relative z-10 space-y-6 text-center">
-            <Sparkles className="w-20 h-20 mx-auto animate-pulse" />
+            <img src="/logo1.png" alt="AcneAI Logo" className="w-20 h-20 mx-auto animate-pulse" />
             <h2 className="text-4xl font-display font-bold">Reset Password</h2>
             <p className="text-xl text-primary-50">We'll help you get back on track</p>
             <div className="pt-8 space-y-4">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <p className="text-primary-50 text-sm">📧 Check your inbox for reset link</p>
+                <p className="text-primary-50 text-sm">Check your inbox for reset link</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <p className="text-primary-50 text-sm">⏱ Link expires in 1 hour</p>
+                <p className="text-primary-50 text-sm">Link expires in 1 hour</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <p className="text-primary-50 text-sm">🔒 Your account stays secure</p>
+                <p className="text-primary-50 text-sm">Your account stays secure</p>
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@ const ForgotPasswordPage = () => {
           <div className="max-w-md mx-auto">
             <div className="text-center mb-8 space-y-3">
               <div className="flex justify-center lg:hidden mb-4">
-                <Sparkles className="w-12 h-12 text-primary-500" />
+                <img src="/logo1.png" alt="AcneAI Logo" className="w-12 h-12 text-primary-500" />
               </div>
               <h2 className="text-3xl font-display font-bold text-neutral-800">Forgot Password?</h2>
               <p className="text-neutral-600">No worries! We'll send you reset instructions</p>

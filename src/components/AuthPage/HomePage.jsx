@@ -78,7 +78,7 @@ const HomePage = () => {
           {/* Left Content */}
           <div className="space-y-8 animate-slideInLeft">
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-600 px-4 py-2 rounded-full">
-              <Sparkles className="w-4 h-4" />
+              <img src="/logo1.png" alt="AcneAI Logo" className="w-4 h-4" />
               <span className="text-sm font-semibold">AI-Powered Skin Analysis</span>
             </div>
 
@@ -222,7 +222,7 @@ const HomePage = () => {
 
             <div className="relative h-64 lg:h-80">
               <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-3xl p-8 flex items-center justify-center">
-                <Sparkles className="w-32 h-32 text-white/50 animate-pulse" />
+                <img src="/logo1.png" alt="AcneAI Logo" className="w-32 h-32 text-white/50 animate-pulse" />
               </div>
             </div>
           </div>

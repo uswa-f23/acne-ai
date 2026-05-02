@@ -69,20 +69,20 @@ const LoginPage = ({ onLogin }) => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
           <div className="relative z-10 space-y-6 text-center">
-            <Sparkles className="w-20 h-20 mx-auto animate-pulse" />
+            <img src="/logo1.png" alt="AcneAI Logo" className="w-20 h-20 mx-auto animate-pulse" />
             <h2 className="text-4xl font-display font-bold">Welcome Back!</h2>
             <p className="text-xl text-primary-50">Continue your journey to clear, healthy skin</p>
             <div className="pt-8 space-y-4">
               <div className="flex items-center space-x-3 text-primary-50">
-                <div className="w-8 h-1 bg-white/50 rounded"></div>
+                {/* <div className="w-8 h-1 bg-white/50 rounded"></div> */}
                 <span>Track your progress</span>
               </div>
               <div className="flex items-center space-x-3 text-primary-50">
-                <div className="w-8 h-1 bg-white/50 rounded"></div>
+                {/* <div className="w-8 h-1 bg-white/50 rounded"></div> */}
                 <span>Get personalized treatments</span>
               </div>
               <div className="flex items-center space-x-3 text-primary-50">
-                <div className="w-8 h-1 bg-white/50 rounded"></div>
+                {/* <div className="w-8 h-1 bg-white/50 rounded"></div> */}
                 <span>Access your skin analysis</span>
               </div>
             </div>
@@ -94,7 +94,7 @@ const LoginPage = ({ onLogin }) => {
           <div className="max-w-md mx-auto">
             <div className="text-center mb-8 space-y-3">
               <div className="flex justify-center lg:hidden mb-4">
-                <Sparkles className="w-12 h-12 text-primary-500" />
+                <img src="/logo1.png" alt="AcneAI Logo" className="w-12 h-12 text-primary-500" />
               </div>
               <h2 className="text-3xl font-display font-bold text-neutral-800">Sign In</h2>
               <p className="text-neutral-600">Access your personalized dashboard</p>

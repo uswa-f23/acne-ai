@@ -37,7 +37,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
 
           
           <Link to="/" className="flex items-center space-x-3 group">
-            <Sparkles className="w-8 h-8 text-primary-500 group-hover:rotate-12 transition-transform duration-300" />
+            <img src="/logo1.png" alt="AcneAI Logo" className="w-8 h-8 text-primary-500 group-hover:rotate-12 transition-transform duration-300" />
             <span className="text-2xl lg:text-3xl font-display font-bold gradient-text">AcneAI</span>
           </Link>
 

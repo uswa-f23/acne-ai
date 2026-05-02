@@ -97,35 +97,19 @@ const AboutPage = () => {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-800 text-center">
-              The <span className="gradient-text">Technology</span>
+              <span className="gradient-text">AcneAI Offers</span>
             </h2>
             
             <div className="card space-y-6">
               <p className="text-lg text-neutral-600 leading-relaxed">
                 Our platform uses advanced machine learning models specifically designed 
-                for acne detection and classification. We employ:
+                for acne detection and classification.
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-3">
-                  <h3 className="text-xl font-display font-semibold text-secondary-600">
-                    ResNet50 Model
-                  </h3>
-                  <p className="text-neutral-600">
-                    For accurate acne type classification with 50 deep layers, identifying 
-                    Comedone, Papulopustular, and Nodulocystic acne types
-                  </p>
-                </div>
+      
 
-                <div className="space-y-3">
-                  <h3 className="text-xl font-display font-semibold text-secondary-600">
-                    ResNet18 Model
-                  </h3>
-                  <p className="text-neutral-600">
-                    For severity assessment, categorizing acne into Mild, Moderate, 
-                    and Severe levels with high precision
-                  </p>
-                </div>
+                
               </div>
 
               <div className="bg-primary-200 rounded-2xl p-6 space-y-4">
