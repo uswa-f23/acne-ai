@@ -25,6 +25,8 @@ const DashboardPage = () => {
     try {
       // Get user info
       const savedUser = authService.getUser();
+      //Debigging
+      console.log('USER OBJECT:', savedUser);
       if (savedUser) setUser(savedUser);
 
       // Load progress summary
@@ -96,7 +98,7 @@ const DashboardPage = () => {
   const latestSeverity = recentResults[0]?.severity || 'N/A';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-50 to-white">
+    <div className="bg-gradient-to-b from-primary-100 to-primary-300 w-full min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24 py-12 lg:py-20">
 
         {/* Header */}
@@ -106,7 +108,7 @@ const DashboardPage = () => {
               <h1 className="text-3xl md:text-4xl font-display font-bold text-neutral-800">
                 Welcome back, <span className="gradient-text">
                   {user?.full_name?.split(' ')[0] || 'User'}
-                </span>! 👋
+                </span>! 
               </h1>
               <p className="text-neutral-600 mt-2">
                 Track your progress and continue your journey to clear skin
@@ -144,7 +146,7 @@ const DashboardPage = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-neutral-600 mb-1">Trend</p>
-                <p className="text-xl font-display font-bold text-secondary-600">
+                <p className="text-3xl font-display font-bold text-primary-600">
                   {getTrendLabel(trend)}
                 </p>
               </div>
@@ -158,7 +160,7 @@ const DashboardPage = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-neutral-600 mb-1">Days Tracked</p>
-                <p className="text-3xl font-display font-bold text-accent-600">
+                <p className="text-3xl font-display font-bold text-primary-600">
                   {progressData?.period_days || 30}
                 </p>
               </div>
@@ -190,7 +192,7 @@ const DashboardPage = () => {
           <div className="lg:col-span-2 space-y-8">
 
             {/* Upload New Analysis */}
-            <div className="card bg-gradient-to-br from-primary-500 via-secondary-400 to-primary-600 text-white border-none shadow-soft-lg">
+            <div className="card rounded-3xl p-8 bg-gradient-to-br from-secondary-500 via-primary-400 to-secondary-600 text-white border-none shadow-soft-lg">
               <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
                 <div className="flex-1">
                   <h3 className="text-2xl font-display font-bold mb-3">
@@ -199,14 +201,7 @@ const DashboardPage = () => {
                   <p className="text-primary-50 mb-6">
                     Upload a new photo to track your progress and get updated recommendations
                   </p>
-                  <Link
-                    to="/detection"
-                    className="inline-flex items-center space-x-2 bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg"
-                  >
-                    <Camera className="w-5 h-5" />
-                    <span>Upload Image</span>
-                    <ChevronRight className="w-5 h-5" />
-                  </Link>
+                  
                 </div>
                 <div className="hidden md:block">
                   <div className="w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
@@ -381,7 +376,7 @@ const DashboardPage = () => {
             </div>
 
             {/* AI Assistant */}
-            <div className="card bg-gradient-to-br from-secondary-100 to-primary-100 border-secondary-200">
+            <div className="card bg-gradient-to-br from-secondary-100 to-primary-100 border-secondary-200 rounded-xl p-6">
               <div className="flex items-center space-x-3 mb-4">
                 <MessageCircle className="w-6 h-6 text-secondary-600" />
                 <h3 className="text-lg font-display font-bold text-neutral-800">
@@ -439,6 +434,21 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
+      {/* Floating Upload Button */}
+      <Link
+        to="/detection"
+        className="fixed bottom-8 left-8 z-50 flex items-center space-x-2
+        bg-primary-500 text-white font-semibold px-6 py-4 rounded-full
+        shadow-dusty-lg hover:bg-primary-600 hover:scale-105
+        transition-all duration-300 animate-float group"
+      >
+        <span className="absolute -inset-1 rounded-full bg-primary-400 opacity-30 animate-ping" />
+        <span className="relative flex items-center space-x-2">
+          <Camera className="w-5 h-5" />
+          <span>Upload Image</span>
+          <ChevronRight className="w-5 h-8 group-hover:translate-x-1 transition-transform duration-300" />
+        </span>
+      </Link>
     </div>
   );
 };

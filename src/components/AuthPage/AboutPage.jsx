@@ -28,7 +28,7 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-400 via-secondary-400 to-primary-500 text-white py-20 lg:py-32">
+      <section className="bg-gradient-to-br from-primary-200 via-secondary-400 to-primary-400 text-white py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="max-w-4xl mx-auto text-center space-y-6 animate-fadeIn">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold">
@@ -93,42 +93,26 @@ const AboutPage = () => {
       </section>
 
       {/* Technology Section */}
-      <section className="bg-gradient-to-b from-white to-primary-50 py-20">
+      <section className="bg-gradient-to-b from-primary-50 to-primary-200 py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-800 text-center">
-              The <span className="gradient-text">Technology</span>
+              <span className="gradient-text">AcneAI Offers</span>
             </h2>
             
             <div className="card space-y-6">
               <p className="text-lg text-neutral-600 leading-relaxed">
                 Our platform uses advanced machine learning models specifically designed 
-                for acne detection and classification. We employ:
+                for acne detection and classification.
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-3">
-                  <h3 className="text-xl font-display font-semibold text-primary-600">
-                    ResNet50 Model
-                  </h3>
-                  <p className="text-neutral-600">
-                    For accurate acne type classification with 50 deep layers, identifying 
-                    Comedone, Papulopustular, and Nodulocystic acne types
-                  </p>
-                </div>
+      
 
-                <div className="space-y-3">
-                  <h3 className="text-xl font-display font-semibold text-secondary-600">
-                    ResNet18 Model
-                  </h3>
-                  <p className="text-neutral-600">
-                    For severity assessment, categorizing acne into Mild, Moderate, 
-                    and Severe levels with high precision
-                  </p>
-                </div>
+                
               </div>
 
-              <div className="bg-primary-50 rounded-2xl p-6 space-y-4">
+              <div className="bg-primary-200 rounded-2xl p-6 space-y-4">
                 <h4 className="font-display font-semibold text-lg text-neutral-800">
                   Our AI Can Identify:
                 </h4>
@@ -153,7 +137,7 @@ const AboutPage = () => {
       </section>
 
       {/* Values Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24 py-12 lg:py-20">
+      <section className="bg-gradient-to-b from-primary-50 to-primary-200 py-20">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-800">
             Our <span className="gradient-text">Values</span>
@@ -163,7 +147,7 @@ const AboutPage = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           {values.map((value, index) => (
             <div
               key={index}
@@ -185,7 +169,7 @@ const AboutPage = () => {
       </section>
 
       {/* Privacy Section */}
-      <section className="bg-gradient-to-b from-white to-primary-50 py-20">
+      <section className="bg-gradient-to-b from-primary-50 to-primary-200 py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="max-w-4xl mx-auto card space-y-6">
             <div className="flex items-center space-x-3 mb-4">
@@ -201,7 +185,7 @@ const AboutPage = () => {
               We comply with all international data protection regulations including GDPR.
             </p>
             
-            <div className="bg-accent-50 border-l-4 border-accent-400 rounded-r-2xl p-6">
+            <div className="bg-primary-100 border-l-4 border-accent-400 rounded-r-2xl p-6">
               <p className="text-neutral-700 leading-relaxed">
                 <strong>Important:</strong> AcneAI provides educational guidance and should 
                 complement, not replace, professional medical advice. For severe acne or 
@@ -214,7 +198,7 @@ const AboutPage = () => {
 
       {/* Contact Section */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24 py-12 lg:py-20">
-        <div className="bg-gradient-to-br from-primary-500 via-secondary-400 to-primary-600 rounded-3xl shadow-soft-xl overflow-hidden">
+        <div className="bg-gradient-to-br from-primary-200 via-secondary-400 to-primary-400 rounded-3xl shadow-soft-xl overflow-hidden">
           <div className="p-8 lg:p-16 text-white">
             <div className="max-w-4xl mx-auto space-y-12">
               <div className="text-center space-y-4">

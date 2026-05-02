@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Sparkles, Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import authService from '../../services/authService';
@@ -12,26 +12,46 @@ const LoginPage = ({ onLogin }) => {
     email: '',
     password: ''
   });
+  const timerRef = useRef(null);
 
+  const showError = (message) => {
+    
+    if (timerRef.current) clearTimeout(timerRef.current);
+    
+    setError(message);
+    
+    timerRef.current = setTimeout(() => {
+      setError('');
+      timerRef.current = null;
+    }, 10000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []); 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    e.stopPropagation();
+    
+    if (timerRef.current) clearTimeout(timerRef.current);
     setError('');
+    setLoading(true);
 
     try {
       const result = await authService.login(formData.email, formData.password);
-
-      if (result.success) {
+      console.log('Auth result:', result);
+      
+      if (result.success === true) {
         onLogin();
         navigate('/dashboard');
       } else {
-        setError('Invalid email or password. Please try again.');
+        showError(result.message || 'Invalid email or password.');
       }
     } catch (err) {
-      const message = err.response?.data?.detail?.message
-        || err.response?.data?.message
-        || 'Login failed. Please check your credentials.';
-      setError(message);
+      console.log('Caught error:', err);
+      showError('Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
     }
@@ -39,31 +59,30 @@ const LoginPage = ({ onLogin }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (error) setError('');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-b from-primary-100 to-primary-300 w-full lg:py-20 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-8 lg:gap-0">
         {/* Left Side - Branding */}
-        <div className="hidden lg:flex bg-gradient-to-br from-primary-500 via-secondary-400 to-primary-600 rounded-l-3xl p-12 flex-col justify-center items-center text-white relative overflow-hidden">
+        <div className="hidden lg:flex bg-gradient-to-br from-secondary-500 via-primary-400 to-secondary-600 rounded-l-3xl p-12 flex-col justify-center items-center text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
           <div className="relative z-10 space-y-6 text-center">
-            <Sparkles className="w-20 h-20 mx-auto animate-pulse" />
+            <img src="/logo1.png" alt="AcneAI Logo" className="w-20 h-20 mx-auto animate-pulse" />
             <h2 className="text-4xl font-display font-bold">Welcome Back!</h2>
             <p className="text-xl text-primary-50">Continue your journey to clear, healthy skin</p>
             <div className="pt-8 space-y-4">
               <div className="flex items-center space-x-3 text-primary-50">
-                <div className="w-8 h-1 bg-white/50 rounded"></div>
+                {/* <div className="w-8 h-1 bg-white/50 rounded"></div> */}
                 <span>Track your progress</span>
               </div>
               <div className="flex items-center space-x-3 text-primary-50">
-                <div className="w-8 h-1 bg-white/50 rounded"></div>
+                {/* <div className="w-8 h-1 bg-white/50 rounded"></div> */}
                 <span>Get personalized treatments</span>
               </div>
               <div className="flex items-center space-x-3 text-primary-50">
-                <div className="w-8 h-1 bg-white/50 rounded"></div>
+                {/* <div className="w-8 h-1 bg-white/50 rounded"></div> */}
                 <span>Access your skin analysis</span>
               </div>
             </div>
@@ -75,7 +94,7 @@ const LoginPage = ({ onLogin }) => {
           <div className="max-w-md mx-auto">
             <div className="text-center mb-8 space-y-3">
               <div className="flex justify-center lg:hidden mb-4">
-                <Sparkles className="w-12 h-12 text-primary-500" />
+                <img src="/logo1.png" alt="AcneAI Logo" className="w-12 h-12 text-primary-500" />
               </div>
               <h2 className="text-3xl font-display font-bold text-neutral-800">Sign In</h2>
               <p className="text-neutral-600">Access your personalized dashboard</p>

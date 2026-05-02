@@ -107,7 +107,7 @@ const DetectionPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-50 to-white">
+    <div className="p-12 min-h-screen bg-gradient-to-b from-primary-100 to-primary-300 w-full py-12 lg:py-20">
       <div className="section-container">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4 animate-fadeIn">
@@ -207,16 +207,21 @@ const DetectionPage = () => {
               </div>
 
               {/* Camera Option */}
-              <div className="card bg-gradient-to-br from-secondary-100 to-primary-100 border-secondary-200">
-                <div className="flex items-center space-x-3 mb-3">
-                  <Camera className="w-6 h-6 text-secondary-600" />
-                  <h4 className="font-semibold text-neutral-800">Take a Photo</h4>
-                </div>
-                <p className="text-sm text-neutral-700 mb-4">
-                  Use your device camera for instant capture
-                </p>
-                <label className="btn-outline w-full cursor-pointer block text-center">
-                  Open Camera
+              <div className="card">
+                <h3 className="text-xl font-display font-semibold text-neutral-800 mb-6">
+                  Take a Photo
+                </h3>
+
+                <label className="block cursor-pointer">
+                  <div className="border-3 border-dashed border-primary-300 rounded-3xl p-12 text-center hover:border-primary-500 hover:bg-primary-50 transition-all duration-300">
+                    <Camera className="w-16 h-16 mx-auto text-primary-400 mb-4" />
+                    <h4 className="font-semibold text-neutral-800 mb-2">
+                      Click to open camera
+                    </h4>
+                    <p className="text-sm text-neutral-600">
+                      Use your device camera for instant capture
+                    </p>
+                  </div>
                   <input
                     type="file"
                     accept="image/*"

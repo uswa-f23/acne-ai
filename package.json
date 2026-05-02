@@ -4,7 +4,7 @@
   "description": "AcneAI - AI-Powered Acne Detection and Treatment Platform",
   "private": true,
   "dependencies": {
-    "axios": "^1.13.6",
+    "axios": "^1.14.0",
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.294.0",
     "react": "^18.2.0",

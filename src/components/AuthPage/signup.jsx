@@ -61,25 +61,25 @@ const SignUpPage = ({ onSignUp }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-b from-primary-100 to-primary-300 w-full lg:py-20 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-8 lg:gap-0">
         {/* Left Side - Branding */}
         <div className="hidden lg:flex bg-gradient-to-br from-secondary-500 via-primary-400 to-secondary-600 rounded-l-3xl p-12 flex-col justify-center items-center text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
           <div className="relative z-10 space-y-6 text-center">
-            <Sparkles className="w-20 h-20 mx-auto animate-pulse" />
+            <img src="/logo1.png" alt="AcneAI Logo" className="w-20 h-20 mx-auto animate-pulse" />
             <h2 className="text-4xl font-display font-bold">Start Your Journey</h2>
             <p className="text-xl text-primary-50">Join thousands achieving clearer skin with AI</p>
             <div className="pt-8 space-y-4">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <p className="text-primary-50 text-sm">✨ AI-powered acne detection in seconds</p>
+                <p className="text-primary-50 text-sm">AI-powered acne detection in seconds</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <p className="text-primary-50 text-sm">📊 Track your progress over time</p>
+                <p className="text-primary-50 text-sm">Track your progress over time</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-                <p className="text-primary-50 text-sm">💝 Personalized treatment recommendations</p>
+                <p className="text-primary-50 text-sm">Personalized treatment recommendations</p>
               </div>
             </div>
           </div>
@@ -90,7 +90,7 @@ const SignUpPage = ({ onSignUp }) => {
           <div className="max-w-md mx-auto">
             <div className="text-center mb-8 space-y-3">
               <div className="flex justify-center lg:hidden mb-4">
-                <Sparkles className="w-12 h-12 text-primary-500" />
+                <img src="/logo1.png" alt="AcneAI Logo" className="w-12 h-12 text-primary-500" />
               </div>
               <h2 className="text-3xl font-display font-bold text-neutral-800">Create Account</h2>
               <p className="text-neutral-600">Begin your transformation today</p>

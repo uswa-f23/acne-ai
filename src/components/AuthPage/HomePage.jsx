@@ -72,12 +72,13 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24 py-12 lg:py-20">
+      <section className="bg-gradient-to-b from-primary-100 to-primary-300 w-full py-12 lg:py-20">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-slideInLeft">
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-600 px-4 py-2 rounded-full">
-              <Sparkles className="w-4 h-4" />
+              <img src="/logo1.png" alt="AcneAI Logo" className="w-4 h-4" />
               <span className="text-sm font-semibold">AI-Powered Skin Analysis</span>
             </div>
 
@@ -137,7 +138,7 @@ const HomePage = () => {
               ))}
               
               {/* Carousel Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-secondary-400/20 to-primary-600/20"></div>
+              <div className="absolute inset-0 "></div>
               
               {/* Carousel Indicators */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
@@ -155,34 +156,13 @@ const HomePage = () => {
                 ))}
               </div>
             </div>
-
-            {/* Floating Cards - New Layout */}
-            {/* Card 1 - Top Left */}
-            {/* <div className="absolute top-8 left-8 card p-6 w-[180px] animate-float shadow-soft-lg z-10 backdrop-blur-sm bg-white/95">
-              <Camera className="w-10 h-10 text-primary-500 mb-3" />
-              <h4 className="font-display font-semibold text-neutral-800 mb-1">Upload Image</h4>
-              <p className="text-sm text-neutral-600">Clear face photo</p>
-            </div> */}
-
-            {/* Card 2 - Center Right (offset more) */}
-            {/* <div className="absolute top-1/2 -translate-y-1/2 right-4 card p-6 w-[180px] animate-float shadow-soft-lg z-10 backdrop-blur-sm bg-white/95" style={{ animationDelay: '0.5s' }}>
-              <TrendingUp className="w-10 h-10 text-secondary-500 mb-3" />
-              <h4 className="font-display font-semibold text-neutral-800 mb-1">AI Analysis</h4>
-              <p className="text-sm text-neutral-600">Type & severity detection</p>
-            </div> */}
-
-            {/* Card 3 - Bottom Left */}
-            {/* <div className="absolute bottom-8 left-8 card p-6 w-[180px] animate-float shadow-soft-lg z-10 backdrop-blur-sm bg-white/95" style={{ animationDelay: '1s' }}> */}
-              {/* <Heart className="w-10 h-10 text-accent-500 mb-3" />
-              <h4 className="font-display font-semibold text-neutral-800 mb-1">Get Treatment</h4>
-              <p className="text-sm text-neutral-600">Personalized care plan</p>
-            </div> */}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="bg-gradient-to-b from-white to-primary-50 py-20">
+      <section className="bg-gradient-to-b from-primary-100 to-primary-300 py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-neutral-800">
@@ -216,8 +196,8 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24 py-12 lg:py-20">
-        <div className="bg-gradient-to-br from-primary-500 via-secondary-400 to-primary-600 rounded-3xl shadow-soft-xl overflow-hidden">
+      <section className="bg-gradient-to-b from-primary-100 to-primary-300  w-full py-12 lg:py-20">
+        <div className="bg-gradient-to-b from-primary-100 to-primary-300 rounded-3xl shadow-soft-xl overflow-hidden max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center p-8 lg:p-16">
             <div className="space-y-6 text-white">
               <h2 className="text-3xl md:text-4xl font-display font-bold">
@@ -227,25 +207,27 @@ const HomePage = () => {
                 Join thousands of users who have already started their journey to 
                 clearer, healthier skin with AcneAI. Get started today for free!
               </p>
+              {/* Floating CTA Button */}
               <Link
                 to="/signup"
-                className="inline-flex items-center space-x-2 bg-white text-primary-600 px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg"
+                className="fixed bottom-8 left-20 z-50 flex items-center space-x-2  bg-primary-400 text-mauve-700 font-semibold px-8 py-8 rounded-full 
+                shadow-dusty-lg border border-primary-200
+                hover:bg-primary-50 hover:scale-105 hover:shadow-dusty-lg
+                transition-all duration-300 animate-float group text-lg"
               >
                 <span>Get Started Now</span>
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </div>
 
             <div className="relative h-64 lg:h-80">
               <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-3xl p-8 flex items-center justify-center">
-                <Sparkles className="w-32 h-32 text-white/50 animate-pulse" />
+                <img src="/logo1.png" alt="AcneAI Logo" className="w-32 h-32 text-white/50 animate-pulse" />
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <section className="max-w-7xl mx-auto px-6 pb-12 text-center">
-        <p className="text-xl text-neutral-600 italic font-bold">
+        <p className="text-xl text-neutral-600 italic font-bold max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           "This analysis is for informational purposes only and is not a substitute for professional medical advice. Please consult a licensed dermatologist for diagnosis and treatment."
         </p>
       </section>

@@ -1,21 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, MessageCircle, Sparkles, Bot } from 'lucide-react';
-import theme from '../../theme';
+import { X, Send, Sparkles, Bot } from 'lucide-react';
 import { sendMessageToBot, getWelcomeMessage, getSuggestedQuestions } from '../../services/chatbotService';
 import ReactMarkdown from 'react-markdown';
 
 const Chatbot = ({ isOpen, onClose }) => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages]     = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
+  const [isTyping, setIsTyping]     = useState(false);
   const messagesEndRef = useRef(null);
-  const inputRef = useRef(null);
+  const inputRef       = useRef(null);
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      const welcomeMsg = getWelcomeMessage();
-      setMessages([welcomeMsg]);
+      setMessages([getWelcomeMessage()]);
     }
   }, [isOpen, messages.length]);
 
@@ -24,36 +22,30 @@ const Chatbot = ({ isOpen, onClose }) => {
   }, [messages]);
 
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
+    if (isOpen && inputRef.current) inputRef.current.focus();
   }, [isOpen]);
 
   const handleSendMessage = async (messageText = inputValue) => {
     if (!messageText.trim()) return;
 
-    const userMessage = {
+    setMessages(prev => [...prev, {
       id: Date.now(),
       text: messageText,
       sender: 'user',
       timestamp: new Date(),
-    };
-
-    setMessages(prev => [...prev, userMessage]);
+    }]);
     setInputValue('');
     setIsTyping(true);
 
     try {
-      // ← Direct call, no fake setTimeout delay
       const botResponse = await sendMessageToBot(messageText);
-
       setMessages(prev => [...prev, {
         id: Date.now() + 1,
         text: botResponse,
         sender: 'bot',
         timestamp: new Date(),
       }]);
-    } catch (error) {
+    } catch {
       setMessages(prev => [...prev, {
         id: Date.now() + 1,
         text: "I'm sorry, I'm having trouble connecting right now. Please try again later.",
@@ -64,10 +56,6 @@ const Chatbot = ({ isOpen, onClose }) => {
     } finally {
       setIsTyping(false);
     }
-  };
-
-  const handleSuggestedQuestion = (question) => {
-    handleSendMessage(question);
   };
 
   const handleKeyPress = (e) => {
@@ -83,141 +71,88 @@ const Chatbot = ({ isOpen, onClose }) => {
 
   return (
     <AnimatePresence>
+      {/* ── Chat Window ───────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 0.2 }}
-        style={{
-          position: 'fixed',
-          bottom: '100px',
-          right: '24px',
-          width: '400px',
-          maxWidth: 'calc(100vw - 48px)',
-          height: '600px',
-          maxHeight: 'calc(100vh - 150px)',
-          backgroundColor: '#ffffff',
-          borderRadius: theme.borderRadius.xl,
-          boxShadow: theme.shadows.xl,
-          border: `2px solid ${theme.colors.primary[200]}`,
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-          zIndex: 1000,
-          fontFamily: theme.typography.fonts.body,
-        }}>
+        className="fixed bottom-28 right-6 z-[1000] flex flex-col
+        w-[400px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-9rem)]
+        bg-white rounded-3xl shadow-soft-xl border-2 border-primary-200
+        overflow-hidden font-body"
+      >
 
-        {/* Header */}
-        <div style={{
-          padding: '1.5rem',
-          background: `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.lavender[500]} 100%)`,
-          color: '#ffffff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <div style={{
-              width: '40px', height: '40px',
-              backgroundColor: 'rgba(255,255,255,0.2)',
-              borderRadius: '50%',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Bot className="w-6 h-6" />
+        {/* ── Header ──────────────────────────────────────────── */}
+        <div className="flex items-center justify-between px-6 py-4
+        bg-gradient-to-r from-primary-500 to-mauve-500 text-white flex-shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+              <Bot className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 style={{
-                margin: 0,
-                fontSize: theme.typography.sizes.lg,
-                fontWeight: '600',
-                fontFamily: theme.typography.fonts.heading,
-              }}>
-                AcneAI Assistant
-              </h3>
-              <p style={{ margin: 0, fontSize: theme.typography.sizes.xs, opacity: 0.9 }}>
-                Online • Ready to help
-              </p>
+              <h3 className="text-base font-semibold font-display m-0">AcneAI Assistant</h3>
+              <p className="text-xs opacity-90 m-0">Online • Ready to help</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            style={{ background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer', padding: '0.5rem', borderRadius: '50%' }}>
+            className="p-2 rounded-full bg-white/10 hover:bg-white/25
+            transition-colors duration-200 border-none shadow-none text-white"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Messages */}
-        <div style={{
-          flex: 1, overflowY: 'auto', padding: '1.5rem',
-          backgroundColor: theme.colors.neutral[50],
-          display: 'flex', flexDirection: 'column', gap: '1rem',
-        }}>
+        {/* ── Messages ────────────────────────────────────────── */}
+        <div className="flex-1 overflow-y-auto px-5 py-4 bg-primary-50
+        flex flex-col gap-4 chatbot-scroll">
 
-          {/* Suggested Questions — show only before first user message */}
+          {/* Suggested questions */}
           {messages.length === 1 && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <p style={{ fontSize: theme.typography.sizes.xs, color: theme.colors.neutral[500], textAlign: 'center' }}>
-                Suggested questions:
-              </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-xs text-neutral-400 text-center">Suggested questions:</p>
               {suggestedQuestions.map((q, i) => (
                 <button
                   key={i}
-                  onClick={() => handleSuggestedQuestion(q)}
-                  style={{
-                    padding: '0.5rem 1rem',
-                    background: theme.colors.primary[50],
-                    border: `1px solid ${theme.colors.primary[200]}`,
-                    borderRadius: theme.borderRadius.md,
-                    color: theme.colors.primary[700],
-                    fontSize: theme.typography.sizes.xs,
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                  }}>
+                  onClick={() => handleSendMessage(q)}
+                  className="px-4 py-2 bg-white border border-primary-200 rounded-xl
+                  text-primary-700 text-xs text-left hover:bg-primary-50
+                  transition-colors duration-200 shadow-soft border-none"
+                  style={{ border: '1px solid' }}
+                >
                   {q}
                 </button>
               ))}
             </div>
           )}
 
+          {/* Message bubbles */}
           {messages.map((message) => (
             <motion.div
               key={message.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              style={{
-                display: 'flex',
-                justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start',
-              }}>
-
+              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              {/* Bot avatar */}
               {message.sender === 'bot' && (
-                <div style={{
-                  width: '32px', height: '32px',
-                  backgroundColor: theme.colors.lavender[100],
-                  borderRadius: '50%',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginRight: '0.5rem', flexShrink: 0,
-                }}>
-                  <Sparkles className="w-4 h-4" style={{ color: theme.colors.lavender[600] }} />
+                <div className="w-8 h-8 rounded-full bg-mauve-100 flex items-center
+                justify-center mr-2 flex-shrink-0 mt-1">
+                  <Sparkles className="w-4 h-4 text-mauve-600" />
                 </div>
               )}
 
-              <div style={{
-                maxWidth: '75%',
-                padding: '0.875rem 1rem',
-                borderRadius: message.sender === 'user'
-                  ? `${theme.borderRadius.lg} ${theme.borderRadius.lg} 0 ${theme.borderRadius.lg}`
-                  : `${theme.borderRadius.lg} ${theme.borderRadius.lg} ${theme.borderRadius.lg} 0`,
-                backgroundColor: message.sender === 'user' ? theme.colors.primary[500] : '#ffffff',
-                color: message.sender === 'user' ? '#ffffff' : theme.colors.neutral[800],
-                boxShadow: theme.shadows.sm,
-                fontSize: theme.typography.sizes.sm,
-                lineHeight: '1.6',
-                background: message.sender === 'user'
-                  ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.lavender[500]} 100%)`
-                  : message.isError ? '#FEF2F2' : '#ffffff',
-                border: message.isError ? '1px solid #FECACA' : 'none',
-              }}>
+              {/* Bubble */}
+              <div className={`max-w-[75%] px-4 py-3 text-sm leading-relaxed shadow-soft
+                ${message.sender === 'user'
+                  ? 'bg-gradient-to-br from-primary-500 to-mauve-500 text-white rounded-t-2xl rounded-bl-2xl rounded-br-sm'
+                  : message.isError
+                    ? 'bg-red-50 text-red-700 border border-red-200 rounded-t-2xl rounded-br-2xl rounded-bl-sm'
+                    : 'bg-white text-neutral-800 rounded-t-2xl rounded-br-2xl rounded-bl-sm'
+                }`}
+              >
                 {message.sender === 'bot' ? (
                   <div className="markdown-container">
                     <ReactMarkdown>{message.text}</ReactMarkdown>
@@ -225,46 +160,28 @@ const Chatbot = ({ isOpen, onClose }) => {
                 ) : (
                   message.text
                 )}
-                <div style={{
-                  fontSize: theme.typography.sizes.xs,
-                  opacity: 0.7,
-                  marginTop: '0.5rem',
-                  textAlign: message.sender === 'user' ? 'right' : 'left',
-                }}>
+                <p className={`text-xs mt-1.5 opacity-70
+                  ${message.sender === 'user' ? 'text-right' : 'text-left'}`}
+                >
                   {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </div>
+                </p>
               </div>
             </motion.div>
           ))}
 
           {/* Typing indicator */}
           {isTyping && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <div style={{
-                width: '32px', height: '32px',
-                backgroundColor: theme.colors.lavender[100],
-                borderRadius: '50%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <Sparkles className="w-4 h-4" style={{ color: theme.colors.lavender[600] }} />
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-mauve-100 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-mauve-600" />
               </div>
-              <div style={{
-                padding: '0.875rem 1rem',
-                borderRadius: theme.borderRadius.lg,
-                backgroundColor: '#ffffff',
-                boxShadow: theme.shadows.sm,
-                display: 'flex', gap: '0.25rem',
-              }}>
+              <div className="bg-white rounded-2xl px-4 py-3 shadow-soft flex gap-1.5 items-center">
                 {[0, 1, 2].map((i) => (
                   <motion.div
                     key={i}
-                    animate={{ y: [0, -8, 0] }}
-                    transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }}
-                    style={{
-                      width: '8px', height: '8px',
-                      borderRadius: '50%',
-                      backgroundColor: theme.colors.lavender[400],
-                    }}
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
+                    className="w-2 h-2 rounded-full bg-primary-400"
                   />
                 ))}
               </div>
@@ -274,44 +191,30 @@ const Chatbot = ({ isOpen, onClose }) => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
-        <div style={{
-          padding: '1rem 1.5rem',
-          backgroundColor: '#ffffff',
-          borderTop: `1px solid ${theme.colors.neutral[200]}`,
-        }}>
-          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end' }}>
+        {/* ── Input Area ──────────────────────────────────────── */}
+        <div className="px-5 py-4 bg-white border-t border-primary-100 flex-shrink-0">
+          <div className="flex gap-3 items-end">
             <textarea
               ref={inputRef}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Type your message..."
-              rows="1"
-              style={{
-                flex: 1,
-                padding: '0.75rem 1rem',
-                fontSize: theme.typography.sizes.sm,
-                border: `2px solid ${theme.colors.neutral[200]}`,
-                borderRadius: theme.borderRadius.md,
-                outline: 'none',
-                resize: 'none',
-                maxHeight: '100px',
-              }}
+              rows={1}
+              className="flex-1 px-4 py-3 text-sm bg-primary-50 border-2 border-primary-200
+              rounded-2xl outline-none resize-none max-h-24 text-neutral-800
+              placeholder:text-neutral-400 focus:border-primary-400 focus:bg-white
+              transition-all duration-200 chatbot-textarea"
             />
             <button
               onClick={() => handleSendMessage()}
               disabled={!inputValue.trim() || isTyping}
-              style={{
-                padding: '0.75rem',
-                background: inputValue.trim() && !isTyping
-                  ? `linear-gradient(135deg, ${theme.colors.primary[500]} 0%, ${theme.colors.lavender[500]} 100%)`
-                  : theme.colors.neutral[300],
-                border: 'none',
-                borderRadius: theme.borderRadius.md,
-                color: '#ffffff',
-                cursor: inputValue.trim() && !isTyping ? 'pointer' : 'not-allowed',
-              }}>
+              className={`p-3 rounded-2xl border-none shadow-none transition-all duration-200 flex-shrink-0
+              ${inputValue.trim() && !isTyping
+                ? 'bg-gradient-to-br from-primary-500 to-mauve-500 text-white hover:scale-105 shadow-soft cursor-pointer'
+                : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+              }`}
+            >
               <Send className="w-5 h-5" />
             </button>
           </div>
