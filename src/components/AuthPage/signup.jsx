@@ -218,9 +218,9 @@ const SignUpPage = ({ onSignUp }) => {
                     className="absolute inset-y-0 right-0 pr-4 flex items-center"
                   >
                     {showPassword ? (
-                      <EyeOff className="h-5 w-5 text-neutral-400 hover:text-neutral-600" />
+                      <EyeOff className="h-5 w-5 text-white-400 hover:text-neutral-600" />
                     ) : (
-                      <Eye className="h-5 w-5 text-neutral-400 hover:text-neutral-600" />
+                      <Eye className="h-5 w-5 text-white-400 hover:text-neutral-600" />
                     )}
                   </button>
                 </div>

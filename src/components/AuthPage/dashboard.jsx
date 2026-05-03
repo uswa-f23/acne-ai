@@ -318,10 +318,6 @@ const DashboardPage = () => {
                   <span className="text-sm font-medium text-neutral-800">View progress</span>
                   <ChevronRight className="w-5 h-5 text-primary-500" />
                 </Link>
-                <button onClick={() => window.dispatchEvent(new CustomEvent('openChatbot'))} className="flex items-center justify-between p-3 bg-primary-50 rounded-xl hover:bg-primary-100 transition-colors w-full">
-                  <span className="text-sm font-medium text-neutral-800">Ask DermaAI</span>
-                  <ChevronRight className="w-5 h-5 text-primary-500" />
-                </button>
               </div>
             </div>
           </div>

@@ -39,10 +39,10 @@ const ProgressPage = () => {
   const getSeverityBg    = (s) => ({ mild: 'bg-green-50',   moderate: 'bg-yellow-50',   severe: 'bg-orange-50',   very_severe: 'bg-red-50'    }[s] || 'bg-primary-50');
 
   const getInsightMessage = (data) => {
-    if (!data || data.total_scans === 0) return { title: "Get Started! ✨", message: "Upload your first photo to begin tracking your skin journey." };
-    if (data.trend === 'improving') return { title: "Great Progress! 🎉", message: `Your skin has improved by ${Math.abs(Math.round(data.severity_change * 100))}% over the past ${data.period_days} days. Keep following your treatment plan!` };
-    if (data.trend === 'worsening') return { title: "Don't Give Up! 💪", message: "Your skin needs a bit more attention. Consider consulting a dermatologist and staying consistent with your routine." };
-    return { title: "Staying Stable 🌿", message: "Your skin condition is stable. Keep up your routine and try to do regular scans for better tracking." };
+    if (!data || data.total_scans === 0) return { title: "Get Started!", message: "Upload your first photo to begin tracking your skin journey." };
+    if (data.trend === 'improving') return { title: "Great Progress!", message: `Your skin has improved by ${Math.abs(Math.round(data.severity_change * 100))}% over the past ${data.period_days} days. Keep following your treatment plan!` };
+    if (data.trend === 'worsening') return { title: "Don't Give Up!", message: "Your skin needs a bit more attention. Consider consulting a dermatologist and staying consistent with your routine." };
+    return { title: "Staying Stable", message: "Your skin condition is stable. Keep up your routine and try to do regular scans for better tracking." };
   };
 
   if (loading) {

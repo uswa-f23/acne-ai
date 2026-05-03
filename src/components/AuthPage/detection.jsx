@@ -313,7 +313,7 @@ const DetectionPage = () => {
 
                 <button
                   onClick={openCamera}
-                  className="w-full cursor-pointer focus:outline-none"
+                  className="w-full cursor-pointer focus:outline-none bg-transparent border-none shadow-none p-0"
                   type="button"
                 >
                   <div className="border-3 border-dashed border-primary-300 rounded-3xl p-12 text-center hover:border-primary-500 hover:bg-primary-50 transition-all duration-300">
@@ -393,7 +393,7 @@ const DetectionPage = () => {
                       {treatmentData.recommendations?.medicated?.length > 0 && (
                         <div className="card">
                           <h4 className="font-display font-semibold text-lg text-neutral-800 mb-4">
-                            💊 Medicated Treatments
+                            Medicated Treatments
                           </h4>
                           <ul className="space-y-3">
                             {treatmentData.recommendations.medicated.map((t, i) => (
@@ -412,7 +412,7 @@ const DetectionPage = () => {
                       {treatmentData.recommendations?.herbal?.length > 0 && (
                         <div className="card">
                           <h4 className="font-display font-semibold text-lg text-neutral-800 mb-4">
-                            🌿 Herbal Remedies
+                            Herbal Remedies
                           </h4>
                           <ul className="space-y-3">
                             {treatmentData.recommendations.herbal.map((t, i) => (
@@ -555,7 +555,7 @@ const DetectionPage = () => {
                 <button
                   onClick={capturePhoto}
                   disabled={!isCameraReady}
-                  className="btn-primary px-8 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-primary flex iems-center px-8 disabled:opacity-50 disabled:cursor-not-allowed"
                   type="button"
                 >
                   <Camera className="w-5 h-5 mr-2" />
