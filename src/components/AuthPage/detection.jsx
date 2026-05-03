@@ -193,7 +193,7 @@ const DetectionPage = () => {
 
                     {!analysisResult && !isAnalyzing && (
                       <div className="flex space-x-3">
-                        <button onClick={handleAnalyze} className="btn-primary flex-1">
+                        <button onClick={handleAnalyze} className="btn-primary flex-1 flex items-center justify-center">
                           <Camera className="w-5 h-5 mr-2" />
                           Analyze Image
                         </button>

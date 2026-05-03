@@ -240,7 +240,15 @@ const DashboardPage = () => {
                         <p className="text-sm font-medium text-neutral-800 capitalize">
                           {point.severity_label?.replace('_', ' ') || 'Analysis'}
                         </p>
-                        <p className="text-xs text-neutral-500">{point.date}</p>
+                        <p className="text-xs text-neutral-500">
+                          {point.date ? new Date(point.date).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          }) : 'No date'}
+                        </p>
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-bold text-primary-600">
