@@ -8,7 +8,8 @@ const SuccessStoriesPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showForm, setShowForm]     = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
-  const [error, setError]           = useState('');
+  const [fetchError, setFetchError] = useState('');
+  const [formError, setFormError]   = useState('');
   const [likedStories, setLikedStories] = useState(() => {
     const saved = localStorage.getItem('likedStories');
     return saved ? JSON.parse(saved) : [];
@@ -19,12 +20,12 @@ const SuccessStoriesPage = () => {
 
   const fetchStories = async () => {
     setIsLoading(true);
-    setError('');
+    setFetchError('');
     try {
       const data = await storiesService.getStories();
       setStories(data);
     } catch {
-      setError('Could not load stories. Please check your connection.');
+      setFetchError('Could not load stories. Please check your connection.');
     } finally {
       setIsLoading(false);
     }
@@ -32,13 +33,13 @@ const SuccessStoriesPage = () => {
 
   const handleSubmit = async () => {
     if (!form.username.trim() || !form.story.trim()) {
-      setError('Please fill in both your name and story.'); return;
+      setFormError('Please fill in both your name and story.'); return;
     }
     if (form.story.trim().length < 20) {
-      setError('Story must be at least 20 characters.'); return;
+      setFormError('Story must be at least 20 characters.'); return;
     }
     setIsSubmitting(true);
-    setError('');
+    setFormError('');
     try {
       await storiesService.submitStory(form);
       setSuccessMsg('Your story has been shared! 🎉');
@@ -47,7 +48,7 @@ const SuccessStoriesPage = () => {
       fetchStories();
       setTimeout(() => setSuccessMsg(''), 4000);
     } catch {
-      setError('Failed to submit. Please try again.');
+      setFormError('Failed to submit. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -83,7 +84,7 @@ const SuccessStoriesPage = () => {
             Read how others transformed their skin. Share your own journey and inspire someone today.
           </p>
           <button
-            onClick={() => setShowForm(!showForm)}
+            onClick={() => { setShowForm(!showForm); setFormError(''); }}
             className="btn-primary inline-flex items-center space-x-2 mt-2"
           >
             <Send className="w-4 h-4" />
@@ -97,7 +98,9 @@ const SuccessStoriesPage = () => {
         <section className="max-w-2xl mx-auto px-6 py-10">
           <div className="card space-y-4">
             <h2 className="text-xl font-display font-bold text-neutral-800">Your Story</h2>
-            {error && <p className="text-sm text-mauve-600 bg-mauve-50 px-4 py-2 rounded-xl">{error}</p>}
+            {formError && (
+              <p className="text-sm text-mauve-600 bg-mauve-50 px-4 py-2 rounded-xl">{formError}</p>
+            )}
             <input
               value={form.username}
               onChange={(e) => setForm(p => ({ ...p, username: e.target.value }))}
@@ -144,11 +147,11 @@ const SuccessStoriesPage = () => {
           </div>
         )}
 
-        {!isLoading && error && !showForm && (
-          <div className="text-center py-20 text-mauve-500">⚠️ {error}</div>
+        {!isLoading && fetchError && (
+          <div className="text-center py-20 text-mauve-500">⚠️ {fetchError}</div>
         )}
 
-        {!isLoading && stories.length === 0 && !error && (
+        {!isLoading && stories.length === 0 && !fetchError && (
           <div className="text-center py-20 space-y-3">
             <Heart className="w-12 h-12 mx-auto text-primary-200" />
             <p className="text-lg font-display font-semibold text-neutral-700">No stories yet</p>
@@ -156,7 +159,7 @@ const SuccessStoriesPage = () => {
           </div>
         )}
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-1 gap-6">
           {stories.map((story) => (
             <div key={story.id} className="p-4 bg-primary-200 rounded-xl card hover:scale-[1.02] transition-transform duration-300">
               {/* Card header */}
@@ -200,7 +203,7 @@ const SuccessStoriesPage = () => {
         {/* Count */}
         {stories.length > 0 && (
           <p className="text-center text-neutral-400 text-sm mt-10">
-            {stories.length} {stories.length === 1 ? 'story' : 'stories'} shared 💗
+            {stories.length} {stories.length === 1 ? 'story' : 'stories'} shared 
           </p>
         )}
       </section>
