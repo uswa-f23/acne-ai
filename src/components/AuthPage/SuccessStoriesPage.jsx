@@ -74,7 +74,6 @@ const SuccessStoriesPage = () => {
       <section className="w-full bg-gradient-to-br from-primary-100 to-mauve-100 py-16">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-4">
           <div className="inline-flex items-center space-x-2 bg-primary-100 text-primary-600 px-4 py-2 rounded-full border border-primary-200">
-            <Sparkles className="w-4 h-4" />
             <span className="text-sm font-semibold">Real People, Real Results</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold text-neutral-800">

@@ -166,7 +166,7 @@ const ProductScanner = () => {
 
               {/* Acne Profile Card */}
               {result?.acne_profile && (
-                <div className="card bg-primary-50 border-primary-200">
+                <div className="card">
                   <h4 className="font-semibold text-neutral-800 mb-3">
                     Personalized For Your Skin
                   </h4>
@@ -230,7 +230,7 @@ const ProductScanner = () => {
 
                   {/* Harmful Ingredients */}
                   {result.analysis.harmful_ingredients?.length > 0 && (
-                    <div className="card border border-red-200">
+                    <div className="card">
                       <h4 className="font-semibold text-red-600 mb-3 flex items-center gap-2">
                         <XCircle className="w-5 h-5" /> Harmful Ingredients Found
                       </h4>
@@ -246,7 +246,7 @@ const ProductScanner = () => {
 
                   {/* Comedogenic Ingredients */}
                   {result.analysis.comedogenic_ingredients?.length > 0 && (
-                    <div className="card border border-yellow-200">
+                    <div className="card">
                       <h4 className="font-semibold text-yellow-600 mb-3 flex items-center gap-2">
                         <AlertCircle className="w-5 h-5" /> Pore-Clogging Ingredients
                       </h4>
@@ -262,7 +262,7 @@ const ProductScanner = () => {
 
                   {/* Beneficial Ingredients */}
                   {result.analysis.beneficial_ingredients?.length > 0 && (
-                    <div className="card border border-green-200">
+                    <div className="card">
                       <h4 className="font-semibold text-green-600 mb-3 flex items-center gap-2">
                         <CheckCircle className="w-5 h-5" /> Beneficial Ingredients
                       </h4>
@@ -284,7 +284,7 @@ const ProductScanner = () => {
                         {result.analysis.alternative_suggestions.map((alt, i) => (
                           <li key={i} className="flex items-start space-x-2">
                             <span className="text-black/80 mt-1">•</span>
-                            <span className="text-primary-50 text-black">{alt}</span>
+                            <span className="text-black/50">{alt}</span>
                           </li>
                         ))}
                       </ul>

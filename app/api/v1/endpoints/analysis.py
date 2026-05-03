@@ -40,6 +40,14 @@ async def upload_analysis(
             message="Image must be under 10MB.",
             status_code=400
         )
+    from app.services.ml.preprocessor import preprocess_image
+    tensor, face_detected = preprocess_image(image_bytes)
+    if not face_detected:
+        return error_response(
+        code="NO_FACE_DETECTED",
+        message="No face detected. Please upload a clear face photo.",
+        status_code=400
+    )
 
     # ── Check image quality ──────────────────────────
     from app.services.ml.preprocessor import check_image_quality
@@ -50,6 +58,7 @@ async def upload_analysis(
             message=f"Image quality issue: {reason}",
             status_code=400
         )
+    
 
     # ── Upload to Cloudinary ─────────────────────────
     try:

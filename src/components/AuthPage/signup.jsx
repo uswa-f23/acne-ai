@@ -3,23 +3,41 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Sparkles, Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import authService from '../../services/authService';
 
+// Valid email regex: requires local part, @, domain, and a real TLD (min 2 chars)
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+
 const SignUpPage = ({ onSignUp }) => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   });
 
+  const validateEmail = (email) => {
+    if (!email) return 'Email is required.';
+    if (!EMAIL_REGEX.test(email)) return 'Please enter a valid email address.';
+    return '';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    // Basic validation
+    // Email format validation
+    const emailValidationError = validateEmail(formData.email);
+    if (emailValidationError) {
+      setEmailError(emailValidationError);
+      setLoading(false);
+      return;
+    }
+
+    // Password validation
     if (formData.password.length < 8) {
       setError('Password must be at least 8 characters.');
       setLoading(false);
@@ -40,13 +58,22 @@ const SignUpPage = ({ onSignUp }) => {
         setError('Registration failed. Please try again.');
       }
     } catch (err) {
-      const message = err.response?.data?.detail?.message
-        || err.response?.data?.message
-        || 'Registration failed. Please try again.';
+      const data = err.response?.data;
 
-      // Handle duplicate email
+      // Your backend error shape: { success: false, error: { code, message } }
+      const message =
+        data?.error?.message ||
+        data?.message ||
+        (Array.isArray(data?.detail)
+          ? data.detail.map((d) => d.msg).join(', ')
+          : data?.detail) ||
+        'Registration failed. Please try again.';
+
       if (err.response?.status === 409) {
         setError('An account with this email already exists. Please sign in.');
+      } else if (err.response?.status === 422) {
+        // ZeroBounce rejection — show under email field
+        setEmailError(message);
       } else {
         setError(message);
       }
@@ -56,8 +83,17 @@ const SignUpPage = ({ onSignUp }) => {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
     if (error) setError('');
+    if (name === 'email') {
+      if (value.length > 0) {
+        setEmailError(validateEmail(value));
+      } else {
+        setEmailError('');
+      }
+    }
   };
 
   return (
@@ -96,7 +132,7 @@ const SignUpPage = ({ onSignUp }) => {
               <p className="text-neutral-600">Begin your transformation today</p>
             </div>
 
-            {/* Error Message */}
+            {/* Global Error Message */}
             {error && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm text-center">
                 {error}
@@ -122,6 +158,7 @@ const SignUpPage = ({ onSignUp }) => {
                     onChange={handleChange}
                     className="input-field pl-12"
                     placeholder="Enter your name"
+                    autoComplete="off"
                   />
                 </div>
               </div>
@@ -133,7 +170,7 @@ const SignUpPage = ({ onSignUp }) => {
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-neutral-400" />
+                    <Mail className={`h-5 w-5 ${emailError ? 'text-red-400' : 'text-neutral-400'}`} />
                   </div>
                   <input
                     id="email"
@@ -142,10 +179,17 @@ const SignUpPage = ({ onSignUp }) => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="input-field pl-12"
-                    placeholder="your@email.com"
+                    className={`input-field pl-12 ${emailError ? 'border-red-400 focus:ring-red-300' : ''}`}
+                    placeholder="your@gmail.com"
+                    autoComplete="off"
                   />
                 </div>
+                {/* Inline email error — shows both format and ZeroBounce errors */}
+                {emailError && (
+                  <p className="text-xs text-red-500 mt-1 flex items-center gap-1">
+                    <span>⚠</span> {emailError}
+                  </p>
+                )}
               </div>
 
               {/* Password Field */}
@@ -166,6 +210,7 @@ const SignUpPage = ({ onSignUp }) => {
                     onChange={handleChange}
                     className="input-field pl-12 pr-12"
                     placeholder="Create a strong password"
+                    autoComplete="new-password"
                   />
                   <button
                     type="button"
@@ -208,7 +253,7 @@ const SignUpPage = ({ onSignUp }) => {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading || !!emailError}
                 className="w-full btn-primary disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {loading ? (

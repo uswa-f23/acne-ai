@@ -78,7 +78,6 @@ const HomePage = () => {
           {/* Left Content */}
           <div className="space-y-8 animate-slideInLeft">
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-600 px-4 py-2 rounded-full">
-              <img src="/logo1.png" alt="AcneAI Logo" className="w-4 h-4" />
               <span className="text-sm font-semibold">AI-Powered Skin Analysis</span>
             </div>
 
