@@ -12,6 +12,7 @@ from app.models.result import Result
 from app.models.treatment import Treatment
 from app.models.progress import Progress
 from app.models.chat import ChatSession, ChatMessage
+from app.models.story import Story
 
 config = context.config
 

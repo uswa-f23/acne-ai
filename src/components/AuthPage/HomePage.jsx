@@ -199,11 +199,11 @@ const HomePage = () => {
       <section className="bg-gradient-to-b from-primary-100 to-primary-300  w-full py-12 lg:py-20">
         <div className="bg-gradient-to-b from-primary-100 to-primary-300 rounded-3xl shadow-soft-xl overflow-hidden max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center p-8 lg:p-16">
-            <div className="space-y-6 text-white">
+            <div className="space-y-6 text-neutral-600">
               <h2 className="text-3xl md:text-4xl font-display font-bold">
                 Ready to Transform Your Skin?
               </h2>
-              <p className="text-lg text-primary-50 leading-relaxed">
+              <p className="text-lg text-neutral-600 leading-relaxed">
                 Join thousands of users who have already started their journey to 
                 clearer, healthier skin with AcneAI. Get started today for free!
               </p>
